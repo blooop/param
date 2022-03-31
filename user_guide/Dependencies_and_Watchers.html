@@ -1,0 +1,1468 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>Dependencies and Watchers — param v1.12.1</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="../_static/graphviz.css" rel="stylesheet" type="text/css">
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css">
+<link href="../_static/site.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/togglebutton.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon">
+<link href="../about.html" rel="author" title="About these documents"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="Serialization_and_Persistence.html" rel="next" title="Serialization and Persistence"/>
+<link href="Parameter_Types.html" rel="prev" title="Parameter types"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="None" name="docsearch:language"/>
+<!-- Google Analytics -->
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-154795830-6', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+<div id="navbar-start">
+<a class="navbar-brand" href="../index.html">
+<img alt="logo" class="logo" src="../_static/logo_horizontal.png"/>
+</a>
+</div>
+<button aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar-collapsible" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="col-lg-9 collapse navbar-collapse" id="navbar-collapsible">
+<div class="mr-auto" id="navbar-center">
+<div class="navbar-center-item">
+<ul class="navbar-nav" id="navbar-main-elements">
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../index.html">
+  Introduction
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../getting_started.html">
+  Getting Started
+ </a>
+</li>
+<li class="toctree-l1 current active nav-item">
+<a class="reference internal nav-link" href="index.html">
+  User Guide
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../comparisons.html">
+  Comparisons
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../roadmap.html">
+  Roadmap
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../reference.html">
+  API
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference external nav-link" href="https://github.com/holoviz/param">
+  Github Source
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../about.html">
+  About
+ </a>
+</li>
+</ul>
+</div>
+</div>
+<div id="navbar-end">
+<div class="navbar-end-item">
+<ul aria-label="Icon Links" class="navbar-nav" id="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/holoviz/param" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+<label class="sr-only">GitHub</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://twitter.com/holoviz_org" rel="noopener" target="_blank" title="Twitter"><span><i class="fab fa-twitter-square"></i></span>
+<label class="sr-only">Twitter</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://discourse.holoviz.org/" rel="noopener" target="_blank" title="Discourse"><span><i class="fab fa-discourse"></i></span>
+<label class="sr-only">Discourse</label></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="container-xl">
+<div class="row">
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="col-12 col-md-3 bd-sidebar">
+<div class="sidebar-start-items"><form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="icon fas fa-search"></i>
+<input aria-label="Search the docs ..." autocomplete="off" class="form-control" id="search-input" name="q" placeholder="Search the docs ..." type="search"/>
+</form><nav aria-label="Main navigation" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item active">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1">
+<a class="reference internal" href="index.html">
+   Overview
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Simplifying_Codebases.html">
+   Simplifying Codebases
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Parameters.html">
+   Parameters and Parameterized objects
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Parameter_Types.html">
+   Parameter Types
+  </a>
+</li>
+<li class="toctree-l1 current active">
+<a class="current reference internal" href="#">
+   Dependencies and Watchers
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Serialization_and_Persistence.html">
+   Serialization and Persistence
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Outputs.html">
+   Outputs
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Logging_and_Warnings.html">
+   Logging and Warnings
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="ParameterizedFunctions.html">
+   ParameterizedFunctions
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Dynamic_Parameters.html">
+   Dynamic Parameters
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="How_Param_Works.html">
+   How Param Works
+  </a>
+</li>
+</ul>
+</div>
+</nav>
+</div>
+<div class="sidebar-end-items">
+</div>
+</div>
+<div class="d-none d-xl-block col-xl-2 bd-toc">
+<div class="toc-item">
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+<i class="fas fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#dependencies">
+   Dependencies
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#dependency-specs">
+     Dependency specs
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#watch-false-dependencies">
+<code class="docutils literal notranslate">
+<span class="pre">
+       watch=False
+      </span>
+</code>
+     dependencies
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#param-depends-with-function-objects">
+<code class="docutils literal notranslate">
+<span class="pre">
+       @param.depends
+      </span>
+</code>
+     with function objects
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#watchers">
+   Watchers
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#using-dependencies-and-watchers">
+   Using dependencies and watchers
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#batch-call-watchers">
+<code class="docutils literal notranslate">
+<span class="pre">
+       batch_call_watchers
+      </span>
+</code>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#discard-events">
+<code class="docutils literal notranslate">
+<span class="pre">
+       discard_events
+      </span>
+</code>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#param-trigger">
+<code class="docutils literal notranslate">
+<span class="pre">
+       .param.trigger
+      </span>
+</code>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#event-parameter">
+<code class="docutils literal notranslate">
+<span class="pre">
+       Event
+      </span>
+</code>
+     Parameter
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#async-executor">
+     Async executor
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#applying-these-techniques-to-your-own-code">
+     Applying these techniques to your own code
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+<div class="toc-item">
+</div>
+</div>
+<main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+<div>
+<section class="tex2jax_ignore mathjax_ignore" id="dependencies-and-watchers">
+<h1>Dependencies and Watchers<a class="headerlink" href="#dependencies-and-watchers" title="Permalink to this headline">#</a></h1>
+<p>As outlined in the <a class="reference internal" href="Dynamic_Parameters.html"><span class="doc std std-doc">Dynamic Parameters</span></a> guide, Param can be used in multiple ways, including as a static set of typed attributes, dynamic attributes that are computed when they are read (<code class="docutils literal notranslate"><span class="pre">param.Dynamic</span></code> parameters, a “pull” or “get” model), and using explicitly expressed chains of actions driven by events at the Parameter level (a “push” or “set” model described in this notebook).</p>
+<p>Unlike Dynamic Parameters, which calculate values when parameters are <em>accessed</em>, the dependency and watcher interface allows events to be triggered when parameters are <em>set</em>. With this interface, parameters and methods can declare that they should be updated or invoked when a given parameter is modified, spawning a cascading series of events that update settings to be consistent, adapt values as appropriate for a change, or invoke computations such as updating a displayed object when a value is modified. This approach is well suited to a GUI interface, where a user interacts with a single widget at a time but other widgets or displays need to be updated in response. The
+<a class="reference internal" href="Dynamic_Parameters.html"><span class="doc std std-doc">Dynamic Parameters</span></a> approach, in contrast, is well suited when Parameters update either on read or in response to a global clock or counter, such as in a simulation or machine-learning iteration.</p>
+<p>This user guide is structured as three main sections:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#Dependencies">Dependencies</a>: High-level dependency declaration via the <code class="docutils literal notranslate"><span class="pre">@param.depends()</span></code> decorator</p></li>
+<li><p><a class="reference external" href="#Watchers">Watchers</a>: Low-level watching mechanism via <code class="docutils literal notranslate"><span class="pre">.param.watch()</span></code>.</p></li>
+<li><p><a class="reference external" href="#Using-dependencies-and-watchers">Using dependencies and watchers</a>: Utilities and tools for working with events created using either dependencies or watchers.</p></li>
+</ul>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">#</a></h2>
+<p>Param’s <code class="docutils literal notranslate"><span class="pre">depends</span></code> decorator allows a programmer to express that a given computation “depends” on a certain set of parameters. For instance, if you have parameters whose values are interlinked, it’s easy to express that relationship with <code class="docutils literal notranslate"><span class="pre">depends</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">param</span>
+
+<span class="k">class</span> <span class="nc">C</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
+    <span class="n">_countries</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Africa'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Ghana'</span><span class="p">,</span> <span class="s1">'Togo'</span><span class="p">,</span> <span class="s1">'South Africa'</span><span class="p">],</span>
+                  <span class="s1">'Asia'</span>  <span class="p">:</span> <span class="p">[</span><span class="s1">'China'</span><span class="p">,</span> <span class="s1">'Thailand'</span><span class="p">,</span> <span class="s1">'Japan'</span><span class="p">,</span> <span class="s1">'Singapore'</span><span class="p">],</span>
+                  <span class="s1">'Europe'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'Austria'</span><span class="p">,</span> <span class="s1">'Bulgaria'</span><span class="p">,</span> <span class="s1">'Greece'</span><span class="p">,</span> <span class="s1">'Switzerland'</span><span class="p">]}</span>
+    
+    <span class="n">continent</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Selector</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">_countries</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">default</span><span class="o">=</span><span class="s1">'Asia'</span><span class="p">)</span>
+    <span class="n">country</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Selector</span><span class="p">(</span><span class="n">_countries</span><span class="p">[</span><span class="s1">'Asia'</span><span class="p">])</span>
+    
+    <span class="nd">@param</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s1">'continent'</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_update_countries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">countries</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_countries</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">continent</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="p">[</span><span class="s1">'country'</span><span class="p">]</span><span class="o">.</span><span class="n">objects</span> <span class="o">=</span> <span class="n">countries</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="n">countries</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">()</span>
+<span class="n">c</span><span class="o">.</span><span class="n">country</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">objects</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('China', ['China', 'Thailand', 'Japan', 'Singapore'])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">continent</span><span class="o">=</span><span class="s1">'Africa'</span>
+<span class="n">c</span><span class="o">.</span><span class="n">country</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">country</span><span class="o">.</span><span class="n">objects</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('Ghana', ['Ghana', 'Togo', 'South Africa'])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C(continent='Africa', country='Ghana', name='C00002')
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, here Param updates the allowed and current values for <code class="docutils literal notranslate"><span class="pre">country</span></code> whenever someone changes the <code class="docutils literal notranslate"><span class="pre">continent</span></code> parameter. This code relies on the dependency mechanism to make sure these parameters are kept appropriately synchronized:</p>
+<ol class="simple">
+<li><p>First, we set up the default continent but do not declare the <code class="docutils literal notranslate"><span class="pre">objects</span></code> and <code class="docutils literal notranslate"><span class="pre">default</span></code> for the <code class="docutils literal notranslate"><span class="pre">country</span></code> parameter. This is because this parameter is dependent on the <code class="docutils literal notranslate"><span class="pre">continent</span></code> and therefore it is easy to set up values that are inconsistent and makes it difficult to override the default continent since changes to both parameters need to be coordinated.</p></li>
+<li><p>Next, if someone chooses a different continent, the list of countries allowed needs to be updated, so the method <code class="docutils literal notranslate"><span class="pre">_update_countries()</span></code> that (a) looks up the countries allowed for the current continent, (b) sets that list as the allowed objects for the <code class="docutils literal notranslate"><span class="pre">country</span></code> parameter, and (c) selects the first such country as the default country.</p></li>
+<li><p>Finally, we expressed that the <code class="docutils literal notranslate"><span class="pre">_update_countries()</span></code> method depends on the <code class="docutils literal notranslate"><span class="pre">continent</span></code> parameter. We specified <code class="docutils literal notranslate"><span class="pre">watch=True</span></code>) to direct Param to invoke this method immediately, whenever the value of <code class="docutils literal notranslate"><span class="pre">continent</span></code> changes. We’ll see <a class="reference external" href="#watch=False-dependencies">examples of watch=False</a> later. Importantly we also set <code class="docutils literal notranslate"><span class="pre">on_init=True</span></code>, which means that when instance is created the <code class="docutils literal notranslate"><span class="pre">self._update_countries()</span></code> method is automatically called setting up the <code class="docutils literal notranslate"><span class="pre">country</span></code> parameter appropriately. This avoids having to declare a <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method to manually call the method ourselves and the potentially brittle process of setting up consistent defaults.</p></li>
+</ol>
+<section id="dependency-specs">
+<h3>Dependency specs<a class="headerlink" href="#dependency-specs" title="Permalink to this headline">#</a></h3>
+<p>The example above expressed a dependency of <code class="docutils literal notranslate"><span class="pre">_update_countries</span></code> on this object’s <code class="docutils literal notranslate"><span class="pre">continent</span></code> parameter. A wide range of such dependency relationships can be specified:</p>
+<ol class="simple">
+<li><p><strong>Multiple dependencies</strong>: Here we had only one parameter in the dependency list, but you can supply any number of dependencies (<code class="docutils literal notranslate"><span class="pre">@param.depends('continent',</span> <span class="pre">'country',</span> <span class="pre">watch=True)</span></code>).</p></li>
+<li><p><strong>Dependencies on nested parameters</strong>: Parameters specified can either be on this class, or on nested Parameterized objects of this class. Parameters on this class are specified as the attribute name as a simple string (like <code class="docutils literal notranslate"><span class="pre">'continent'</span></code>). Nested parameters are specified as a dot-separated string (like <code class="docutils literal notranslate"><span class="pre">'handler.strategy.i'</span></code>, if this object has a parameter <code class="docutils literal notranslate"><span class="pre">handler</span></code>, whose value is an object <code class="docutils literal notranslate"><span class="pre">strategy</span></code>, which itself has a parameter <code class="docutils literal notranslate"><span class="pre">i</span></code>). If you want to depend on some arbitrary parameter elsewhere in Python, just create an <code class="docutils literal notranslate"><span class="pre">instantiate=False</span></code> (and typically read-only) parameter on this class to hold it, then here you can specify the path to it on <em>this</em> object.</p></li>
+<li><p><strong>Dependencies on metadata</strong>: By default, dependencies are tied to a parameter’s current value, but dependencies can also be on any of the declared metadata about the parameter (e.g. a method could depend on <code class="docutils literal notranslate"><span class="pre">country:constant</span></code>, triggering when someone changes whether that parameter is constant, or on <code class="docutils literal notranslate"><span class="pre">country:objects</span></code> (triggering when the objects list is replaced (not just changed in place as in appending). The available metadata is listed in the <code class="docutils literal notranslate"><span class="pre">__slots__</span></code> attribute of a Parameter object (e.g.
+<code class="docutils literal notranslate"><span class="pre">p.param.continent.__slots__</span></code>).</p></li>
+<li><p><strong>Dependencies on any nested param</strong>: If you want to depend on <em>all</em> the parameters of a nested object <code class="docutils literal notranslate"><span class="pre">n</span></code>, your method can depend on <code class="docutils literal notranslate"><span class="pre">'n.param'</span></code> (where parameter <code class="docutils literal notranslate"><span class="pre">n</span></code> has been set to a Parameterized object).</p></li>
+<li><p><strong>Dependencies on a method name</strong>: Often you will want to break up computation into multiple chunks, some of which are useful on their own and some which require other computations to have been done as prerequisites. In this case, your method can declare a dependency on another method (as a string name), which means that it will now watch everything that method watches, and will then get invoked after that method is invoked.</p></li>
+</ol>
+<p>We can see examples of all these dependency specifications in class <code class="docutils literal notranslate"><span class="pre">D</span></code> below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">D</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="s2">"never"</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">o</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Selector</span><span class="p">([</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">,</span> <span class="s1">'blue'</span><span class="p">])</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">ClassSelector</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">instantiate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>                    
+    
+    <span class="nd">@param</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'s'</span><span class="p">,</span> <span class="s1">'n.country'</span><span class="p">,</span> <span class="s1">'s:constant'</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">cb1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"cb1 x=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2"> s=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="si">}</span><span class="s2"> "</span>
+              <span class="sa">f</span><span class="s2">"param.s.constant=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">constant</span><span class="si">}</span><span class="s2"> n.country=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="o">.</span><span class="n">country</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="nd">@param</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s1">'n.param'</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">cb2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"cb2 n=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="nd">@param</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="s1">'i'</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">cb3</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"cb3 x=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2"> i=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="nd">@param</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s1">'cb3'</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">cb4</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"cb4 x=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2"> i=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">D</span><span class="p">()</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>D(i=-5, n=C(continent='Africa', country='Ghana', name='C00002'), name='D00003', o='red', s='never', x=7)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we have created an object <code class="docutils literal notranslate"><span class="pre">d</span></code> of type <code class="docutils literal notranslate"><span class="pre">D</span></code> with a unique ID like <code class="docutils literal notranslate"><span class="pre">D00003</span></code>. <code class="docutils literal notranslate"><span class="pre">d</span></code> has various parameters, including one nested Parameterized object in its parameter <code class="docutils literal notranslate"><span class="pre">n</span></code>. In this class, the nested parameter is set to our earlier object <code class="docutils literal notranslate"><span class="pre">c</span></code>, using <code class="docutils literal notranslate"><span class="pre">instantiate=False</span></code> to ensure that the value is precisely the same earlier object, not a copy of it. You can verify that it is the same object by comparing e.g. <code class="docutils literal notranslate"><span class="pre">name='C00002'</span></code> in the repr for the subobject in <code class="docutils literal notranslate"><span class="pre">d</span></code> to the name in the repr for <code class="docutils literal notranslate"><span class="pre">c</span></code> in the previous section; both should be e.g. <code class="docutils literal notranslate"><span class="pre">C00002</span></code>.</p>
+<p>Dependencies are stored declaratively so that they are accessible for other libraries to inspect and use. E.g. we can now examine the dependencies for the decorated callback method <code class="docutils literal notranslate"><span class="pre">cb1</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dependencies</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">method_dependencies</span><span class="p">(</span><span class="s1">'cb1'</span><span class="p">)</span>
+<span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">o</span><span class="o">.</span><span class="n">inst</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">o</span><span class="o">.</span><span class="n">pobj</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">o</span><span class="o">.</span><span class="n">what</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">dependencies</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['D00003.x:value',
+ 'D00003.s:value',
+ 'D00003.s:constant',
+ 'C00002.country:value']
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we can see that method <code class="docutils literal notranslate"><span class="pre">cb1</span></code> will be invoked for any value changes in <code class="docutils literal notranslate"><span class="pre">d</span></code>’s parameters <code class="docutils literal notranslate"><span class="pre">x</span></code> or <code class="docutils literal notranslate"><span class="pre">s</span></code>, for any value changes in <code class="docutils literal notranslate"><span class="pre">c</span></code>’s parameter <code class="docutils literal notranslate"><span class="pre">country</span></code>, and a change in the <code class="docutils literal notranslate"><span class="pre">constant</span></code> slot of <code class="docutils literal notranslate"><span class="pre">s</span></code>. These dependency relationships correspond to the specification <code class="docutils literal notranslate"><span class="pre">@param.depends('x',</span> <span class="pre">'s',</span> <span class="pre">'n.country',</span> <span class="pre">'s:constant',</span> <span class="pre">watch=True)</span></code> above.</p>
+<p>Now, if we change <code class="docutils literal notranslate"><span class="pre">x</span></code>, we can see that Param invokes <code class="docutils literal notranslate"><span class="pre">cb1</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cb1 x=5 s=never param.s.constant=False n.country=Ghana
+cb3 x=5 i=-5
+cb4 x=5 i=-5
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cb3</span></code> and <code class="docutils literal notranslate"><span class="pre">cb4</span></code> are also invoked, because <code class="docutils literal notranslate"><span class="pre">cb3</span></code> depends on <code class="docutils literal notranslate"><span class="pre">x</span></code> as well, plus <code class="docutils literal notranslate"><span class="pre">cb4</span></code> depends on <code class="docutils literal notranslate"><span class="pre">cb3</span></code>, inheriting all of <code class="docutils literal notranslate"><span class="pre">cb3</span></code>’s dependencies.</p>
+<p>If we now change <code class="docutils literal notranslate"><span class="pre">c.country</span></code>, <code class="docutils literal notranslate"><span class="pre">cb1</span></code> will be invoked since <code class="docutils literal notranslate"><span class="pre">cb1</span></code> depends on <code class="docutils literal notranslate"><span class="pre">n.country</span></code>, and <code class="docutils literal notranslate"><span class="pre">n</span></code> is currently set to <code class="docutils literal notranslate"><span class="pre">c</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="s1">'Togo'</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cb1 x=5 s=never param.s.constant=False n.country=Togo
+cb2 n=&lt;C C00002&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, <code class="docutils literal notranslate"><span class="pre">cb2</span></code> is also invoked, because <code class="docutils literal notranslate"><span class="pre">cb2</span></code> depends on <em>all</em> parameters of the subobject in <code class="docutils literal notranslate"><span class="pre">n</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">continent</span></code> is also a parameter on <code class="docutils literal notranslate"><span class="pre">c</span></code>, so <code class="docutils literal notranslate"><span class="pre">cb2</span></code> will also be invoked if you change <code class="docutils literal notranslate"><span class="pre">c.continent</span></code>. Note that changing <code class="docutils literal notranslate"><span class="pre">c.continent</span></code> itself invokes <code class="docutils literal notranslate"><span class="pre">c._update_countries()</span></code>, so in that case <code class="docutils literal notranslate"><span class="pre">cb2</span></code> actually gets invoked <em>twice</em> (once for each parameter changed on <code class="docutils literal notranslate"><span class="pre">c</span></code>), along with <code class="docutils literal notranslate"><span class="pre">cb1</span></code> (watching <code class="docutils literal notranslate"><span class="pre">n.country</span></code>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">continent</span> <span class="o">=</span> <span class="s1">'Europe'</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cb1 x=5 s=never param.s.constant=False n.country=Austria
+cb2 n=&lt;C C00002&gt;
+cb2 n=&lt;C C00002&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Changing metadata works just the same as changing values. Because <code class="docutils literal notranslate"><span class="pre">cb1</span></code> depends on the <code class="docutils literal notranslate"><span class="pre">constant</span></code> slot of <code class="docutils literal notranslate"><span class="pre">s</span></code>, it is invoked when that slot changes:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">constant</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cb1 x=5 s=never param.s.constant=True n.country=Austria
+</pre></div>
+</div>
+</div>
+</div>
+<p>Importantly, if we replace a sub-object on which we have declared dependencies, Param automatically rebinds the dependencies to the new object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">C</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cb1 x=5 s=never param.s.constant=True n.country=China
+cb2 n=&lt;C C00004&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that if the values of the dependencies on the old and new object are the same, no event is fired.</p>
+<p>Additionally the previously bound sub-object is now no longer connected:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">continent</span> <span class="o">=</span> <span class="s1">'Europe'</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="watch-false-dependencies">
+<h3><code class="docutils literal notranslate"><span class="pre">watch=False</span></code> dependencies<a class="headerlink" href="#watch-false-dependencies" title="Permalink to this headline">#</a></h3>
+<p>The previous examples all supplied <code class="docutils literal notranslate"><span class="pre">watch=True</span></code>, indicating that Param itself should watch for changes in the dependency and invoke that method when a dependent parameter is set. If <code class="docutils literal notranslate"><span class="pre">watch=False</span></code> (the default), <code class="docutils literal notranslate"><span class="pre">@param.depends</span></code> declares that such a dependency exists, but does not automatically invoke it. <code class="docutils literal notranslate"><span class="pre">watch=False</span></code> is useful for setting up code for a separate library like <a class="reference external" href="https://panel.holoviz.org">Panel</a> or <a class="reference external" href="https://holoviews.org">HoloViews</a> to use, indicating which parameters the external library should watch so that it knows when to invoke the decorated method. Typically, you’ll want to use <code class="docutils literal notranslate"><span class="pre">watch=False</span></code> when that external library needs to do something with the return value of the method (a functional approach), and use <code class="docutils literal notranslate"><span class="pre">watch=True</span></code> when the function is <a class="reference external" href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)">side-effecty</a>, i.e. having an effect just from running it, and not normally returning a value.</p>
+<p>For instance, consider this Param class with methods that return values to display:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mul</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span>  <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+
+    <span class="nd">@param</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">view2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">prod</span> <span class="o">=</span> <span class="n">Mul</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'Multiplier'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>You could run this code manually:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prod</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">prod</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">prod</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'70'
+</pre></div>
+</div>
+</div>
+</div>
+<p>Or you could pass the parameters and the <code class="docutils literal notranslate"><span class="pre">view</span></code> method to Panel, and let Panel invoke it as needed by following the dependency chain:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">panel</span> <span class="k">as</span> <span class="nn">pn</span>
+<span class="n">pn</span><span class="o">.</span><span class="n">extension</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/javascript">
+(function(root) {
+  function now() {
+    return new Date();
+  }
+
+  var force = true;
+
+  if (typeof root._bokeh_onload_callbacks === "undefined" || force === true) {
+    root._bokeh_onload_callbacks = [];
+    root._bokeh_is_loading = undefined;
+  }
+
+  if (typeof (root._bokeh_timeout) === "undefined" || force === true) {
+    root._bokeh_timeout = Date.now() + 5000;
+    root._bokeh_failed_load = false;
+  }
+
+  function run_callbacks() {
+    try {
+      root._bokeh_onload_callbacks.forEach(function(callback) {
+        if (callback != null)
+          callback();
+      });
+    } finally {
+      delete root._bokeh_onload_callbacks
+    }
+    console.debug("Bokeh: all callbacks have finished");
+  }
+
+  function load_libs(css_urls, js_urls, js_modules, callback) {
+    if (css_urls == null) css_urls = [];
+    if (js_urls == null) js_urls = [];
+    if (js_modules == null) js_modules = [];
+
+    root._bokeh_onload_callbacks.push(callback);
+    if (root._bokeh_is_loading > 0) {
+      console.debug("Bokeh: BokehJS is being loaded, scheduling callback at", now());
+      return null;
+    }
+    if (js_urls.length === 0 && js_modules.length === 0) {
+      run_callbacks();
+      return null;
+    }
+    console.debug("Bokeh: BokehJS not loaded, scheduling load and callback at", now());
+
+    function on_load() {
+      root._bokeh_is_loading--;
+      if (root._bokeh_is_loading === 0) {
+        console.debug("Bokeh: all BokehJS libraries/stylesheets loaded");
+        run_callbacks()
+      }
+    }
+
+    function on_error() {
+      console.error("failed to load " + url);
+    }
+
+    for (var i = 0; i < css_urls.length; i++) {
+      var url = css_urls[i];
+      const element = document.createElement("link");
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.rel = "stylesheet";
+      element.type = "text/css";
+      element.href = url;
+      console.debug("Bokeh: injecting link tag for BokehJS stylesheet: ", url);
+      document.body.appendChild(element);
+    }
+
+    var skip = [];
+    if (window.requirejs) {
+      window.requirejs.config({'packages': {}, 'paths': {}, 'shim': {}});
+      
+      root._bokeh_is_loading = css_urls.length + 0;
+    } else {
+      root._bokeh_is_loading = css_urls.length + js_urls.length + js_modules.length;
+    }
+    for (var i = 0; i < js_urls.length; i++) {
+      var url = js_urls[i];
+      if (skip.indexOf(url) >= 0) {
+	if (!window.requirejs) {
+	  on_load();
+	}
+	continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    for (var i = 0; i < js_modules.length; i++) {
+      var url = js_modules[i];
+      if (skip.indexOf(url) >= 0) {
+	if (!window.requirejs) {
+	  on_load();
+	}
+	continue;
+      }
+      var element = document.createElement('script');
+      element.onload = on_load;
+      element.onerror = on_error;
+      element.async = false;
+      element.src = url;
+      element.type = "module";
+      console.debug("Bokeh: injecting script tag for BokehJS library: ", url);
+      document.head.appendChild(element);
+    }
+    if (!js_urls.length && !js_modules.length) {
+      on_load()
+    }
+  };
+
+  function inject_raw_css(css) {
+    const element = document.createElement("style");
+    element.appendChild(document.createTextNode(css));
+    document.body.appendChild(element);
+  }
+
+  var js_urls = ["https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-2.4.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-mathjax-2.4.2.min.js", "https://unpkg.com/@holoviz/panel@0.12.7/dist/panel.min.js"];
+  var js_modules = [];
+  var css_urls = ["https://unpkg.com/@holoviz/panel@0.12.7/dist/css/card.css", "https://unpkg.com/@holoviz/panel@0.12.7/dist/css/json.css", "https://unpkg.com/@holoviz/panel@0.12.7/dist/css/loading.css", "https://unpkg.com/@holoviz/panel@0.12.7/dist/css/alerts.css", "https://unpkg.com/@holoviz/panel@0.12.7/dist/css/widgets.css", "https://unpkg.com/@holoviz/panel@0.12.7/dist/css/dataframe.css", "https://unpkg.com/@holoviz/panel@0.12.7/dist/css/markdown.css"];
+  var inline_js = [
+    function(Bokeh) {
+      inject_raw_css("\n    .bk.pn-loading.arcs:before {\n      background-image: url(\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiBub25lOyBkaXNwbGF5OiBibG9jazsgc2hhcGUtcmVuZGVyaW5nOiBhdXRvOyIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89InhNaWRZTWlkIj4gIDxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjMyIiBzdHJva2Utd2lkdGg9IjgiIHN0cm9rZT0iI2MzYzNjMyIgc3Ryb2tlLWRhc2hhcnJheT0iNTAuMjY1NDgyNDU3NDM2NjkgNTAuMjY1NDgyNDU3NDM2NjkiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+ICAgIDxhbmltYXRlVHJhbnNmb3JtIGF0dHJpYnV0ZU5hbWU9InRyYW5zZm9ybSIgdHlwZT0icm90YXRlIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIgZHVyPSIxcyIga2V5VGltZXM9IjA7MSIgdmFsdWVzPSIwIDUwIDUwOzM2MCA1MCA1MCI+PC9hbmltYXRlVHJhbnNmb3JtPiAgPC9jaXJjbGU+PC9zdmc+\");\n      max-height: 400px;\n    }\n    ");
+    },
+    function(Bokeh) {
+      Bokeh.set_log_level("info");
+    },
+    function(Bokeh) {} // ensure no trailing comma for IE
+  ];
+
+  function run_inline_js() {
+    if ((root.Bokeh !== undefined) || (force === true)) {
+      for (var i = 0; i < inline_js.length; i++) {
+        inline_js[i].call(root, root.Bokeh);
+      }} else if (Date.now() < root._bokeh_timeout) {
+      setTimeout(run_inline_js, 100);
+    } else if (!root._bokeh_failed_load) {
+      console.log("Bokeh: BokehJS failed to load within specified timeout.");
+      root._bokeh_failed_load = true;
+    }
+  }
+
+  if (root._bokeh_is_loading === 0) {
+    console.debug("Bokeh: BokehJS loaded, going straight to plotting");
+    run_inline_js();
+  } else {
+    load_libs(css_urls, js_urls, js_modules, function() {
+      console.debug("Bokeh: BokehJS plotting callback run at", now());
+      run_inline_js();
+    });
+  }
+}(window));</script><script type="application/javascript">
+if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
+  window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
+}
+
+
+    function JupyterCommManager() {
+    }
+
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        google.colab.kernel.comms.registerTarget(comm_id, (comm) => {
+          var messages = comm.messages[Symbol.asyncIterator]();
+          function processIteratorResult(result) {
+            var message = result.value;
+            console.log(message)
+            var content = {data: message.data, comm_id};
+            var buffers = []
+            for (var buffer of message.buffers || []) {
+              buffers.push(new DataView(buffer))
+            }
+            var metadata = message.metadata || {};
+            var msg = {content, buffers, metadata}
+            msg_handler(msg);
+            return messages.next().then(processIteratorResult);
+          }
+          return messages.next().then(processIteratorResult);
+        })
+      }
+    }
+
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        comm.open();
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      } else if (typeof google != 'undefined' && google.colab.kernel != null) {
+        var comm_promise = google.colab.kernel.comms.open(comm_id)
+        comm_promise.then((comm) => {
+          window.PyViz.comms[comm_id] = comm;
+          if (msg_handler) {
+            var messages = comm.messages[Symbol.asyncIterator]();
+            function processIteratorResult(result) {
+              var message = result.value;
+              var content = {data: message.data};
+              var metadata = message.metadata || {comm_id};
+              var msg = {content, metadata}
+              msg_handler(msg);
+              return messages.next().then(processIteratorResult);
+            }
+            return messages.next().then(processIteratorResult);
+          }
+        }) 
+        var sendClosure = (data, metadata, buffers, disposeOnDone) => {
+          return comm_promise.then((comm) => {
+            comm.send(data, metadata, buffers, disposeOnDone);
+          });
+        };
+        var comm = {
+          send: sendClosure
+        };
+      }
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+    window.PyViz.comm_manager = new JupyterCommManager();
+    
+
+
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
+
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
+
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if ((output.data == undefined) || (!output.data.hasOwnProperty(EXEC_MIME_TYPE))) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    var html_node = toinsert[nchildren-1].children[0];
+    html_node.innerHTML = output.data[HTML_MIME_TYPE];
+    var scripts = [];
+    var nodelist = html_node.querySelectorAll("script");
+    for (var i in nodelist) {
+      if (nodelist.hasOwnProperty(i)) {
+        scripts.push(nodelist[i])
+      }
+    }
+
+    scripts.forEach( function (oldScript) {
+      var newScript = document.createElement("script");
+      var attrs = [];
+      var nodemap = oldScript.attributes;
+      for (var j in nodemap) {
+        if (nodemap.hasOwnProperty(j)) {
+          attrs.push(nodemap[j])
+        }
+      }
+      attrs.forEach(function(attr) { newScript.setAttribute(attr.name, attr.value) });
+      newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+      oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+    if (JS_MIME_TYPE in output.data) {
+      toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    }
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      window.PyViz.plot_index[id] = Bokeh.index[id];
+    } else {
+      window.PyViz.plot_index[id] = null;
+    }
+  } else if (output.metadata[EXEC_MIME_TYPE]["server_id"] !== undefined) {
+    var bk_div = document.createElement("div");
+    bk_div.innerHTML = output.data[HTML_MIME_TYPE];
+    var script_attrs = bk_div.children[0].attributes;
+    for (var i = 0; i < script_attrs.length; i++) {
+      toinsert[toinsert.length - 1].childNodes[1].setAttribute(script_attrs[i].name, script_attrs[i].value);
+    }
+    // store reference to server id on output_area
+    output_area._bokeh_server_id = output.metadata[EXEC_MIME_TYPE]["server_id"];
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  var server_id = handle.cell.output_area._bokeh_server_id;
+  if (((id === undefined) || !(id in PyViz.plot_index)) && (server_id !== undefined)) { return; }
+  var comm = window.PyViz.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (server_id !== null) {
+    comm.send({event_type: 'server_delete', 'id': server_id});
+    return;
+  } else if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete PyViz.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    var doc = window.Bokeh.index[id].model.document
+    doc.clear();
+    const i = window.Bokeh.documents.indexOf(doc);
+    if (i > -1) {
+      window.Bokeh.documents.splice(i, 1);
+    }
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete PyViz.comms["hv-extension-comm"];
+  window.PyViz.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+</script></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pn</span><span class="o">.</span><span class="n">Row</span><span class="p">(</span><span class="n">prod</span><span class="o">.</span><span class="n">param</span><span class="p">,</span> <span class="n">prod</span><span class="o">.</span><span class="n">view</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div id="1002">
+<div class="bk-root" data-root-id="1002" id="3e331a9e-1374-4e63-b485-3f480067dd6e"></div>
+</div>
+<script type="application/javascript">(function(root) {
+  function embed_document(root) {
+    var docs_json = {"5f65abb2-28a6-4538-a173-723c40da4bdf":{"defs":[{"extends":null,"module":null,"name":"ReactiveHTML1","overrides":[],"properties":[]},{"extends":null,"module":null,"name":"FlexBox1","overrides":[],"properties":[{"default":"flex-start","kind":null,"name":"align_content"},{"default":"flex-start","kind":null,"name":"align_items"},{"default":"row","kind":null,"name":"flex_direction"},{"default":"wrap","kind":null,"name":"flex_wrap"},{"default":"flex-start","kind":null,"name":"justify_content"}]},{"extends":null,"module":null,"name":"TemplateActions1","overrides":[],"properties":[{"default":0,"kind":null,"name":"open_modal"},{"default":0,"kind":null,"name":"close_modal"}]},{"extends":null,"module":null,"name":"MaterialTemplateActions1","overrides":[],"properties":[{"default":0,"kind":null,"name":"open_modal"},{"default":0,"kind":null,"name":"close_modal"}]}],"roots":{"references":[{"attributes":{"margin":[5,10,5,10],"name":"","text":"<b>Multiplier</b>"},"id":"1004","type":"Div"},{"attributes":{"end":100,"margin":[5,10,5,10],"start":-100,"step":0.1,"title":"B","value":10},"id":"1006","type":"Slider"},{"attributes":{"children":[{"id":"1003"},{"id":"1007"}],"margin":[0,0,0,0],"name":"Row00120"},"id":"1002","type":"Row"},{"attributes":{"end":100,"margin":[5,10,5,10],"start":-100,"step":0.1,"title":"A","value":7},"id":"1005","type":"Slider"},{"attributes":{"children":[{"id":"1004"},{"id":"1005"},{"id":"1006"}],"margin":[5,5,5,5],"min_width":300,"name":"Multiplier","width":300},"id":"1003","type":"Column"},{"attributes":{"reload":false},"id":"1010","type":"panel.models.location.Location"},{"attributes":{"css_classes":["markdown"],"margin":[5,5,5,5],"name":"ParamMethod00113","text":"&lt;p&gt;70&lt;/p&gt;"},"id":"1008","type":"panel.models.markup.HTML"},{"attributes":{"client_comm_id":"0668ad5714554cbb903ff833b848129f","comm_id":"3205b6aeacdb49728f1779c53e2f57ee","plot_id":"1002"},"id":"1009","type":"panel.models.comm_manager.CommManager"},{"attributes":{"children":[{"id":"1008"}],"margin":[0,0,0,0],"name":"Row00117"},"id":"1007","type":"Row"}],"root_ids":["1002","1009","1010"]},"title":"Bokeh Application","version":"2.4.2"}};
+    var render_items = [{"docid":"5f65abb2-28a6-4538-a173-723c40da4bdf","root_ids":["1002"],"roots":{"1002":"3e331a9e-1374-4e63-b485-3f480067dd6e"}}];
+    root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+  }
+  if (root.Bokeh !== undefined && root.Bokeh.Panel !== undefined) {
+    embed_document(root);
+  } else {
+    var attempts = 0;
+    var timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined && root.Bokeh.Panel !== undefined) {
+        clearInterval(timer);
+        embed_document(root);
+      } else if (document.readyState == "complete") {
+        attempts++;
+        if (attempts > 200) {
+          clearInterval(timer);
+          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+        }
+      }
+    }, 25, root)
+  }
+})(window);</script></div></div>
+</div>
+<p>Panel creates widgets for the parameters, runs the <code class="docutils literal notranslate"><span class="pre">view</span></code> method with the default values of those parameters, and displays the result. As long as you have a live Python process running (not just a static HTML export of this page as on param.holoviz.org), Panel will then watch for changes in those parameters due to the widgets and will re-execute the <code class="docutils literal notranslate"><span class="pre">view</span></code> method to update the output whenever one of those parameters changes. Using the dependency declarations, Panel is able to do all this without ever having to be told separately which parameters there are or what dependency relationships there are.</p>
+<p>How does that work? A library like Panel can simply ask Param what dependency relationships have been declared for the method passed to it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">o</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">prod</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">method_dependencies</span><span class="p">(</span><span class="s1">'view'</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['a', 'b']
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that in this particular case the <code class="docutils literal notranslate"><span class="pre">depends</span></code> decorator could have been omitted, because Param conservatively assumes that any method <em>could</em> read the value of any parameter, and thus if it has no other declaration from the user, the dependencies are assumed to include <em>all</em> parameters (including <code class="docutils literal notranslate"><span class="pre">name</span></code>, even though it is constant):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">o</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">prod</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">method_dependencies</span><span class="p">(</span><span class="s1">'view2'</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['name', 'a', 'b']
+</pre></div>
+</div>
+</div>
+</div>
+<p>Conversely, if you want to declare that a given method does not depend on any parameters at all, you can use <code class="docutils literal notranslate"><span class="pre">@param.depends()</span></code>.</p>
+<p>Be sure not to set <code class="docutils literal notranslate"><span class="pre">watch=True</span></code> for dependencies for any method you pass to an external library like Panel to handle, or else that method will get invoked <em>twice</em>, once by Param itself (discarding the output) and once by the external library (using the output). Typically you will want <code class="docutils literal notranslate"><span class="pre">watch=True</span></code> for a side-effecty function or method (typically not returning a value), and <code class="docutils literal notranslate"><span class="pre">watch=False</span></code> (the default) for a function or method with a return value, and you’ll need an external library to do something with that return value.</p>
+</section>
+<section id="param-depends-with-function-objects">
+<h3><code class="docutils literal notranslate"><span class="pre">@param.depends</span></code> with function objects<a class="headerlink" href="#param-depends-with-function-objects" title="Permalink to this headline">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">depends</span></code> decorator can also be used with bare functions, in which case the specification should be an actual Parameter object, not a string. The function will be called with the parameter(s)’s value(s) as positional arguments:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@param</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">country</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">i</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">country</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"g country=</span><span class="si">{</span><span class="n">country</span><span class="si">}</span><span class="s2"> i=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">country</span> <span class="o">=</span> <span class="s1">'Greece'</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g country=Greece i=-5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">6</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cb3 x=5 i=6
+cb4 x=5 i=6
+g country=Greece i=6
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here you can see that in addition to the classmethods starting with <code class="docutils literal notranslate"><span class="pre">cb</span></code> previously set up to depend on the country, setting <code class="docutils literal notranslate"><span class="pre">c</span></code>’s <code class="docutils literal notranslate"><span class="pre">country</span></code> parameter or <code class="docutils literal notranslate"><span class="pre">d</span></code>’s <code class="docutils literal notranslate"><span class="pre">i</span></code> parameter now also invokes function <code class="docutils literal notranslate"><span class="pre">g</span></code>, passing in the current values of the parameters it depends on whenever the function gets invoked. <code class="docutils literal notranslate"><span class="pre">g</span></code> can then make a side effect happen such as updating any other data structure it can access that needs to be changed when <code class="docutils literal notranslate"><span class="pre">country</span></code> or <code class="docutils literal notranslate"><span class="pre">i</span></code> changes.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">@param.depends(...,</span> <span class="pre">watch=False)</span></code> with a function allows providing bound standalone functions to an external library for display, just as in the <code class="docutils literal notranslate"><span class="pre">.view</span></code> method above.</p>
+<p>Of course, you can still invoke <code class="docutils literal notranslate"><span class="pre">g</span></code> with your own explicit arguments, which does not invoke any watching mechanisms:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">(</span><span class="s1">'USA'</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g country=USA i=7
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="watchers">
+<h2>Watchers<a class="headerlink" href="#watchers" title="Permalink to this headline">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">depends</span></code> decorator is built on Param’s lower-level <code class="docutils literal notranslate"><span class="pre">.param.watch</span></code> interface, registering the decorated method or function as a <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> object associated with those parameter(s). If you’re building or using a complex library like Panel, you can use the low-level Parameter watching interface to set up arbitrary chains of watchers to respond to parameter value or metadata setting:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">obj.param.watch(fn,</span> <span class="pre">parameter_names,</span> <span class="pre">what='value',</span> <span class="pre">onlychanged=True,</span> <span class="pre">queued=False,</span> <span class="pre">precedence=0)</span></code>: <br/>Create and register a <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> that will invoke the given callback <code class="docutils literal notranslate"><span class="pre">fn</span></code> when the <code class="docutils literal notranslate"><span class="pre">what</span></code> item (<code class="docutils literal notranslate"><span class="pre">value</span></code> or one of the Parameter’s slots) is set (or more specifically, changed, if <code class="docutils literal notranslate"><span class="pre">onlychanged=True</span></code>). If <code class="docutils literal notranslate"><span class="pre">queued=True</span></code>, delays calling any events triggered during this callback’s execution until all processing of the current events has been completed (breadth-first Event processing rather than the default depth-first processing). The <code class="docutils literal notranslate"><span class="pre">precedence</span></code> declares a precedence level for the Watcher that determines the priority with which the callback is executed. Lower precedence levels are executed earlier. Negative precedences are reserved for internal Watchers, i.e. those set up by <code class="docutils literal notranslate"><span class="pre">param.depends</span></code>. The <code class="docutils literal notranslate"><span class="pre">fn</span></code> will be invoked with one or more <code class="docutils literal notranslate"><span class="pre">Event</span></code> objects that have been triggered, as positional arguments. Returns a <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> object, e.g. for use in <code class="docutils literal notranslate"><span class="pre">unwatch</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">obj.param.watch_values(fn,</span> <span class="pre">parameter_names,</span> <span class="pre">what='value',</span> <span class="pre">onlychanged=True,</span> <span class="pre">queued=False,</span> <span class="pre">precedence=0)</span></code>: <br/>Easier-to-use version of <code class="docutils literal notranslate"><span class="pre">obj.param.watch</span></code> specific to watching for changes in parameter values. Same as <code class="docutils literal notranslate"><span class="pre">watch</span></code>, but hard-codes <code class="docutils literal notranslate"><span class="pre">what='value'</span></code> and invokes the callback <code class="docutils literal notranslate"><span class="pre">fn</span></code> using keyword arguments <em>param_name</em>=<em>new_value</em> rather than with a positional-argument list of <code class="docutils literal notranslate"><span class="pre">Event</span></code> objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">obj.param.unwatch(watcher)</span></code>: <br/>Remove the given <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> (typically obtained as the return value from <code class="docutils literal notranslate"><span class="pre">watch</span></code> or <code class="docutils literal notranslate"><span class="pre">watch_values</span></code>) from those registered on this <code class="docutils literal notranslate"><span class="pre">obj</span></code>.</p></li>
+</ul>
+<p>To see how to use <code class="docutils literal notranslate"><span class="pre">watch</span></code> and <code class="docutils literal notranslate"><span class="pre">watch_values</span></code>, let’s make a class with parameters <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> and various watchers with corresponding callback methods:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">e</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"(event: </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> changed from </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">old</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">e</span><span class="o">.</span><span class="n">new</span><span class="si">}</span><span class="s2">)"</span>
+
+<span class="k">class</span> <span class="nc">P</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run_a1</span><span class="p">,</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">],</span> <span class="n">queued</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">precedence</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run_a2</span><span class="p">,</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">],</span> <span class="n">precedence</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run_b</span><span class="p">,</span>  <span class="p">[</span><span class="s1">'b'</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">run_a1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'a1'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">(</span><span class="n">event</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">run_a2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'a2'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">(</span><span class="n">event</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">run_b</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">'b'</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">(</span><span class="n">event</span><span class="p">))</span>
+        
+<span class="n">p</span> <span class="o">=</span> <span class="n">P</span><span class="p">()</span>
+
+<span class="n">p</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a2 1 (event: a changed from 0 to 1)
+a1 1 (event: a changed from 0 to 1)
+b 1 (event: b changed from 0 to 1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, we have set up three Watchers, each invoking a method on <code class="docutils literal notranslate"><span class="pre">P</span></code> when either <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code> changes. The first Watcher invokes <code class="docutils literal notranslate"><span class="pre">run_a1</span></code> when <code class="docutils literal notranslate"><span class="pre">a</span></code> changes, and in turn <code class="docutils literal notranslate"><span class="pre">run_a1</span></code> changes <code class="docutils literal notranslate"><span class="pre">b</span></code>. Since <code class="docutils literal notranslate"><span class="pre">queued=True</span></code> for <code class="docutils literal notranslate"><span class="pre">run_a1</span></code>, <code class="docutils literal notranslate"><span class="pre">run_b</span></code> is not invoked while <code class="docutils literal notranslate"><span class="pre">run_a1</span></code> executes, but only later once both <code class="docutils literal notranslate"><span class="pre">run_a1</span></code> and <code class="docutils literal notranslate"><span class="pre">run_a2</span></code> have completed (since both Watchers were triggered by the original event <code class="docutils literal notranslate"><span class="pre">p.a=1</span></code>).</p>
+<p>Additionally we have set a higher <code class="docutils literal notranslate"><span class="pre">precedence</span></code> value for <code class="docutils literal notranslate"><span class="pre">run_a1</span></code> which results in it being executed <strong>after</strong> <code class="docutils literal notranslate"><span class="pre">run_a2</span></code>.</p>
+<p>Here we’re using data from the <code class="docutils literal notranslate"><span class="pre">Event</span></code> objects given to each callback to see what’s changed; try <code class="docutils literal notranslate"><span class="pre">help(param.parameterized.Event)</span></code> for details of what is in these objects (and similarly try the help for <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> (returned by <code class="docutils literal notranslate"><span class="pre">watch</span></code>) or <code class="docutils literal notranslate"><span class="pre">PInfo</span></code> (returned by <code class="docutils literal notranslate"><span class="pre">.param.method_dependencies</span></code>)).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#help(param.parameterized.Event)</span>
+<span class="c1">#help(param.parameterized.Watcher)</span>
+<span class="c1">#help(param.parameterized.PInfo)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-dependencies-and-watchers">
+<h2>Using dependencies and watchers<a class="headerlink" href="#using-dependencies-and-watchers" title="Permalink to this headline">#</a></h2>
+<p>Whether you use the <code class="docutils literal notranslate"><span class="pre">watch</span></code> or the <code class="docutils literal notranslate"><span class="pre">depends</span></code> approach, Param will store a set of <code class="docutils literal notranslate"><span class="pre">Watcher</span></code> objects on each <code class="docutils literal notranslate"><span class="pre">Parameterized</span></code> object that let it manage and process <code class="docutils literal notranslate"><span class="pre">Event</span></code>s. Param provides various context managers, methods, and Parameters that help you work with Watchers and Events:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#batch_call_watchers"><code class="docutils literal notranslate"><span class="pre">batch_call_watchers</span></code></a>: context manager accumulating and eliding multiple Events to be applied on exit from the context</p></li>
+<li><p><a class="reference external" href="#discard_events"><code class="docutils literal notranslate"><span class="pre">discard_events</span></code></a>: context manager silently discarding events generated while in the context</p></li>
+<li><p><a class="reference external" href="#.param.trigger"><code class="docutils literal notranslate"><span class="pre">.param.trigger</span></code></a>: method to force creation of an Event for this Parameter’s Watchers without a corresponding change to the Parameter</p></li>
+<li><p><a class="reference external" href="#Event-Parameter">Event Parameter</a>: Special Parameter type providing triggerable transient Events (like a momentary push button)</p></li>
+<li><p><a class="reference external" href="#Async-executor">Async executor</a>: Support for asynchronous processing of Events, e.g. for interfacing to external servers</p></li>
+</ul>
+<p>Each of these will be described in the following sections.</p>
+<section id="batch-call-watchers">
+<h3><code class="docutils literal notranslate"><span class="pre">batch_call_watchers</span></code><a class="headerlink" href="#batch-call-watchers" title="Permalink to this headline">#</a></h3>
+<p>Context manager that accumulates parameter changes on the supplied object and dispatches them all at once when the context is exited, to allow multiple changes to a given parameter to be accumulated and short-circuited, rather than prompting serial changes from a batch of parameter setting:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">param</span><span class="o">.</span><span class="n">parameterized</span><span class="o">.</span><span class="n">batch_call_watchers</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a2 5 (event: a changed from 1 to 5)
+a1 5 (event: a changed from 1 to 5)
+b 2 (event: b changed from 1 to 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, even though <code class="docutils literal notranslate"><span class="pre">p.a</span></code> is changed four times, each of the watchers of <code class="docutils literal notranslate"><span class="pre">a</span></code> is executed only once, with the final value. One of those events then changes <code class="docutils literal notranslate"><span class="pre">b</span></code>, so <code class="docutils literal notranslate"><span class="pre">b</span></code>’s watcher is also executed once.</p>
+<p>If we set <code class="docutils literal notranslate"><span class="pre">b</span></code> explicitly, <code class="docutils literal notranslate"><span class="pre">b</span></code>’s watcher will be invoked twice, once for the explicit setting of <code class="docutils literal notranslate"><span class="pre">b</span></code>, and once because of the code <code class="docutils literal notranslate"><span class="pre">self.b</span> <span class="pre">+=</span> <span class="pre">1</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">param</span><span class="o">.</span><span class="n">parameterized</span><span class="o">.</span><span class="n">batch_call_watchers</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b 8 (event: b changed from 2 to 8)
+a2 5 (event: a changed from 1 to 5)
+a1 5 (event: a changed from 1 to 5)
+b 9 (event: b changed from 8 to 9)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If all you need to do is set a batch of parameters, you can use <code class="docutils literal notranslate"><span class="pre">.update</span></code> instead of <code class="docutils literal notranslate"><span class="pre">batch_call_watchers</span></code>, which has the same underlying batching mechanism:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b 2 (event: b changed from 9 to 2)
+a2 9 (event: a changed from 5 to 9)
+a1 9 (event: a changed from 5 to 9)
+b 3 (event: b changed from 2 to 3)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="discard-events">
+<h3><code class="docutils literal notranslate"><span class="pre">discard_events</span></code><a class="headerlink" href="#discard-events" title="Permalink to this headline">#</a></h3>
+<p>Context manager that discards any events within its scope that are triggered on the supplied parameterized object. Useful for making silent changes to dependent parameters, e.g. in a setup phase. If your dependencies are meant to ensure consistency between parameters, be careful that your manual changes in this context don’t put the object into an inconsistent state!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">param</span><span class="o">.</span><span class="n">parameterized</span><span class="o">.</span><span class="n">discard_events</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="mi">9</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>(Notice that none of the callbacks is invoked, despite all the Watchers on <code class="docutils literal notranslate"><span class="pre">p.a</span></code> and <code class="docutils literal notranslate"><span class="pre">p.b</span></code>.)</p>
+</section>
+<section id="param-trigger">
+<h3><code class="docutils literal notranslate"><span class="pre">.param.trigger</span></code><a class="headerlink" href="#param-trigger" title="Permalink to this headline">#</a></h3>
+<p>Usually, a Watcher will be invoked only when a parameter is set (and only if it is changed, by default). What if you want to trigger a Watcher in other cases? For instance, if a parameter value is a mutable container like a list and you add or change an item in that container, Param’s <code class="docutils literal notranslate"><span class="pre">set</span></code> method will never be invoked, because in Python the container itself is not changed when the contents are changed. In such cases, you can trigger a watcher explicitly, using <code class="docutils literal notranslate"><span class="pre">.param.trigger(*param_names)</span></code>. Triggering does not affect parameter values, apart from the special parameters of type Event (see <a class="reference external" href="#Event-Parameter:">below</a>).</p>
+<p>For instance, if you set <code class="docutils literal notranslate"><span class="pre">p.b</span></code> to the value it already has, no callback will normally be invoked:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>But if you explicitly trigger parameter <code class="docutils literal notranslate"><span class="pre">b</span></code> on <code class="docutils literal notranslate"><span class="pre">p</span></code>, <code class="docutils literal notranslate"><span class="pre">run_b</span></code> will be invoked, even though the value of <code class="docutils literal notranslate"><span class="pre">b</span></code> is not changing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s1">'b'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>b 9 (event: b changed from 9 to 9)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you trigger <code class="docutils literal notranslate"><span class="pre">a</span></code>, the usual series of chained events will be triggered, including changing <code class="docutils literal notranslate"><span class="pre">b</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s1">'a'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a2 2 (event: a changed from 2 to 2)
+a1 2 (event: a changed from 2 to 2)
+b 10 (event: b changed from 9 to 10)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="event-parameter">
+<h3><code class="docutils literal notranslate"><span class="pre">Event</span></code> Parameter<a class="headerlink" href="#event-parameter" title="Permalink to this headline">#</a></h3>
+<p>An Event Parameter is a special Parameter type whose value is intimately linked to the triggering of events for Watchers to consume. Event has a Boolean value, which when set to <code class="docutils literal notranslate"><span class="pre">True</span></code> triggers the associated watchers (as any Parameter does) but then is automatically set back to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Conversely, if events are triggered directly on a <code class="docutils literal notranslate"><span class="pre">param.Event</span></code> via <code class="docutils literal notranslate"><span class="pre">.trigger</span></code>, the value is transiently set to True (so that it’s clear which of many parameters being watched may have changed), then restored to False when the triggering completes. An Event parameter is thus like a momentary switch or pushbutton with a transient True value that normally serves only to launch some other action (e.g. via a <code class="docutils literal notranslate"><span class="pre">param.depends</span></code> decorator or a watcher), rather than encapsulating the action itself as <code class="docutils literal notranslate"><span class="pre">param.Action</span></code> does.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Q</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Event</span><span class="p">()</span>
+    
+    <span class="nd">@param</span><span class="o">.</span><span class="n">depends</span><span class="p">(</span><span class="s1">'e'</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'e==</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+        
+<span class="n">q</span> <span class="o">=</span> <span class="n">Q</span><span class="p">()</span>
+<span class="n">q</span><span class="o">.</span><span class="n">e</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>e==True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="o">.</span><span class="n">e</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="s1">'e'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>e==True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">q</span><span class="o">.</span><span class="n">e</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="async-executor">
+<h3>Async executor<a class="headerlink" href="#async-executor" title="Permalink to this headline">#</a></h3>
+<p>Param’s events and callbacks described above are all synchronous, happening in a clearly defined order where the processing of each function blocks all other processing until it is completed. Watchers can also be used with the Python3 asyncio <a class="reference external" href="https://docs.python.org/3/library/asyncio-task.html"><code class="docutils literal notranslate"><span class="pre">async</span></code>/<code class="docutils literal notranslate"><span class="pre">await</span></code></a> support to operate asynchronously. To do this, you can define <code class="docutils literal notranslate"><span class="pre">param.parameterized.async_executor</span></code> with an asynchronous executor that schedules tasks on an event loop from e.g. Tornado or the <a class="reference external" href="https://docs.python.org/3/library/asyncio.html">asyncio</a> library, which will allow you to use coroutines and other asynchronous functions as <code class="docutils literal notranslate"><span class="pre">.param.watch</span></code> callbacks.</p>
+<p>As an example, you can use the Tornado IOLoop underlying this Jupyter Notebook by putting events on the event loop and watching for results to accumulate:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">param</span><span class="o">,</span> <span class="nn">asyncio</span><span class="o">,</span> <span class="nn">aiohttp</span>
+<span class="kn">from</span> <span class="nn">tornado.ioloop</span> <span class="kn">import</span> <span class="n">IOLoop</span>
+
+<span class="n">param</span><span class="o">.</span><span class="n">parameterized</span><span class="o">.</span><span class="n">async_executor</span> <span class="o">=</span> <span class="n">IOLoop</span><span class="o">.</span><span class="n">current</span><span class="p">()</span><span class="o">.</span><span class="n">add_callback</span>
+
+<span class="k">class</span> <span class="nc">Downloader</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">List</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">watch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fetch</span><span class="p">,</span> <span class="p">[</span><span class="s1">'url'</span><span class="p">])</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">fetch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="n">aiohttp</span><span class="o">.</span><span class="n">ClientSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="k">async</span> <span class="k">with</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">new</span><span class="p">)</span> <span class="k">as</span> <span class="n">response</span><span class="p">:</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="k">await</span> <span class="n">response</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">event</span><span class="o">.</span><span class="n">new</span><span class="p">,</span> <span class="n">img</span><span class="p">))</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">Downloader</span><span class="p">()</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"https://picsum.photos/800/300?image=</span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="n">f</span><span class="o">.</span><span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[]
+</pre></div>
+</div>
+</div>
+</div>
+<p>When you execute the above cell, you will normally get <code class="docutils literal notranslate"><span class="pre">[]</span></code>, indicating that there are not yet any results available.</p>
+<p>What the code does is to request 10 different images from an image site by repeatedly setting the <code class="docutils literal notranslate"><span class="pre">url</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">Downloader</span></code> to a new URL. Each time the <code class="docutils literal notranslate"><span class="pre">url</span></code> parameter is modified, because of the <code class="docutils literal notranslate"><span class="pre">self.param.watch</span></code> call, the <code class="docutils literal notranslate"><span class="pre">self.fetch</span></code> callback is invoked. Because it is marked <code class="docutils literal notranslate"><span class="pre">async</span></code> and uses <code class="docutils literal notranslate"><span class="pre">await</span></code> internally, the method call returns without waiting for results to be available. Once the <code class="docutils literal notranslate"><span class="pre">await</span></code>ed results are available, the method continues with its execution and a tuple (<em>image_name</em>, <em>image_data</em>) is added to the <code class="docutils literal notranslate"><span class="pre">results</span></code> parameter.</p>
+<p>If you need to have all the results available (and have an internet connection!), you can wait for them:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"Waiting: "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
+<span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">results</span><span class="p">)</span><span class="o">&lt;</span><span class="n">n</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+    
+<span class="p">[</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">results</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Waiting: 0 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 0 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 2 
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['https://picsum.photos/800/300?image=6',
+ 'https://picsum.photos/800/300?image=4',
+ 'https://picsum.photos/800/300?image=5',
+ 'https://picsum.photos/800/300?image=1',
+ 'https://picsum.photos/800/300?image=2',
+ 'https://picsum.photos/800/300?image=3',
+ 'https://picsum.photos/800/300?image=0']
+</pre></div>
+</div>
+</div>
+</div>
+<p>This <code class="docutils literal notranslate"><span class="pre">while</span></code> loop iterates until all results are available, printing a count of results so far each time through the loop. Processing is done during the <code class="docutils literal notranslate"><span class="pre">asyncio.sleep</span></code> call, which returns control to the IOLoop for that length of time, and then the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop checks to see if processing is done yet. Once it’s done, the list of URLs downloaded is displayed, and you can see from the ordering (unlikely to be sequential) that the downloading was done asynchronously. You can find out more about programming asynchronously in the <a class="reference external" href="https://docs.python.org/3/library/asyncio.html">asyncio</a> docs.</p>
+</section>
+<section id="applying-these-techniques-to-your-own-code">
+<h3>Applying these techniques to your own code<a class="headerlink" href="#applying-these-techniques-to-your-own-code" title="Permalink to this headline">#</a></h3>
+<p>As you can see, there is extensive support for watching for events on Parameters, whether you use the low-level Watcher interface or the high-level <code class="docutils literal notranslate"><span class="pre">@param.depends</span></code> interface. As usual when multiple APIs are provided, it’s a good idea to start with the high-level interface, and only drop down to the low-level watching approach if you need the additional power and control and are able to accept the corresponding complexity. The asynchronous approach is then only needed for very specific applications where you want your code to be decoupled from an external system. Most people can simply use <code class="docutils literal notranslate"><span class="pre">@param.depends</span></code> to cover all their needs for interaction between Parameters and for computation that depends on Parameters.</p>
+</section>
+</section>
+</section>
+</div>
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+<a class="left-prev" href="Parameter_Types.html" id="prev-link" title="previous page">
+<i class="fas fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Parameter types</p>
+</div>
+</a>
+<a class="right-next" href="Serialization_and_Persistence.html" id="next-link" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Serialization and Persistence</p>
+</div>
+<i class="fas fa-angle-right"></i>
+</a>
+</div>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<div class="footer-item">
+<p class="copyright">
+    © Copyright 2003-2022 HoloViz developers.<br/>
+</p>
+</div>
+<div class="footer-item">
+<p class="last-updated">
+Last updated on 2022-03-31.<br/>
+</p>
+</div>
+</div>
+</footer>
+</body>
+</html>

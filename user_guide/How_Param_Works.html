@@ -1,0 +1,462 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>How Param Works — param v1.12.1</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="../_static/graphviz.css" rel="stylesheet" type="text/css">
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css">
+<link href="../_static/site.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/togglebutton.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon">
+<link href="../about.html" rel="author" title="About these documents"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="../comparisons.html" rel="next" title="Comparison to other approaches"/>
+<link href="Dynamic_Parameters.html" rel="prev" title="Dynamic parameter values"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="None" name="docsearch:language"/>
+<!-- Google Analytics -->
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-154795830-6', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+<div id="navbar-start">
+<a class="navbar-brand" href="../index.html">
+<img alt="logo" class="logo" src="../_static/logo_horizontal.png"/>
+</a>
+</div>
+<button aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar-collapsible" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="col-lg-9 collapse navbar-collapse" id="navbar-collapsible">
+<div class="mr-auto" id="navbar-center">
+<div class="navbar-center-item">
+<ul class="navbar-nav" id="navbar-main-elements">
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../index.html">
+  Introduction
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../getting_started.html">
+  Getting Started
+ </a>
+</li>
+<li class="toctree-l1 current active nav-item">
+<a class="reference internal nav-link" href="index.html">
+  User Guide
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../comparisons.html">
+  Comparisons
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../roadmap.html">
+  Roadmap
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../reference.html">
+  API
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference external nav-link" href="https://github.com/holoviz/param">
+  Github Source
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../about.html">
+  About
+ </a>
+</li>
+</ul>
+</div>
+</div>
+<div id="navbar-end">
+<div class="navbar-end-item">
+<ul aria-label="Icon Links" class="navbar-nav" id="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/holoviz/param" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+<label class="sr-only">GitHub</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://twitter.com/holoviz_org" rel="noopener" target="_blank" title="Twitter"><span><i class="fab fa-twitter-square"></i></span>
+<label class="sr-only">Twitter</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://discourse.holoviz.org/" rel="noopener" target="_blank" title="Discourse"><span><i class="fab fa-discourse"></i></span>
+<label class="sr-only">Discourse</label></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="container-xl">
+<div class="row">
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="col-12 col-md-3 bd-sidebar">
+<div class="sidebar-start-items"><form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="icon fas fa-search"></i>
+<input aria-label="Search the docs ..." autocomplete="off" class="form-control" id="search-input" name="q" placeholder="Search the docs ..." type="search"/>
+</form><nav aria-label="Main navigation" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item active">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1">
+<a class="reference internal" href="index.html">
+   Overview
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Simplifying_Codebases.html">
+   Simplifying Codebases
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Parameters.html">
+   Parameters and Parameterized objects
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Parameter_Types.html">
+   Parameter Types
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Dependencies_and_Watchers.html">
+   Dependencies and Watchers
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Serialization_and_Persistence.html">
+   Serialization and Persistence
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Outputs.html">
+   Outputs
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Logging_and_Warnings.html">
+   Logging and Warnings
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="ParameterizedFunctions.html">
+   ParameterizedFunctions
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Dynamic_Parameters.html">
+   Dynamic Parameters
+  </a>
+</li>
+<li class="toctree-l1 current active">
+<a class="current reference internal" href="#">
+   How Param Works
+  </a>
+</li>
+</ul>
+</div>
+</nav>
+</div>
+<div class="sidebar-end-items">
+</div>
+</div>
+<div class="d-none d-xl-block col-xl-2 bd-toc">
+<div class="toc-item">
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+<i class="fas fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#">
+   How Param Works
+  </a>
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#descriptors">
+     Descriptors
+    </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#slots">
+     Slots
+    </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#metaclasses">
+     Metaclasses
+    </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#custom-attribute-access">
+     Custom attribute access
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#other-notes">
+   Other notes
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+<div class="toc-item">
+</div>
+</div>
+<main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+<div>
+<section class="tex2jax_ignore mathjax_ignore" id="how-param-works">
+<h1>How Param Works<a class="headerlink" href="#how-param-works" title="Permalink to this headline">#</a></h1>
+<p>Param seamlessly makes Python attributes have a much richer set of behaviors than they would otherwise, at once both more powerful (with automatic dynamic behavior) and more tightly controlled by the class author. It is natural to wonder how Param achieves this, especially given that it is a normal pure-Python library, not an alternative implementation of Python or a pre-processor. The answer is that Param makes extensive use of Python language features that allow tailoring the behavior of attribute getting and setting in sophisticated ways. You don’t need to read any of the material on this page to use Param successfully, but it might help you understand what’s going on “under the hood” for debugging or optimizing complex situations or for extending Param.</p>
+<section id="descriptors">
+<h2>Descriptors<a class="headerlink" href="#descriptors" title="Permalink to this headline">#</a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> object is a type of Python “descriptor”, i.e., an object that implements custom <code class="docutils literal notranslate"><span class="pre">__get__</span></code> and/or <code class="docutils literal notranslate"><span class="pre">__set__</span></code> behavior. When a descriptor is an attribute of a class, Python will invoke those custom methods instead of simply getting and setting the actual value of the attribute (i.e., the <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> object). The <a class="reference external" href="https://docs.python.org/3/howto/descriptor.html">Python descriptor docs</a> explain this process in detail, but briefly, let’s consider a simple descriptor that returns how many times it has been accessed:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Count</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_count</span><span class="o">=</span><span class="n">start</span>
+    
+    <span class="k">def</span> <span class="fm">__get__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">objtype</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_count</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">C</span><span class="p">:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">Count</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">C</span><span class="p">()</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5, 5, 5, 1, 2, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, class attributes <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> here can both be used the same way, but <code class="docutils literal notranslate"><span class="pre">x</span></code> is a normal Python attribute, returning the fixed value <code class="docutils literal notranslate"><span class="pre">5</span></code> that was set on the class, while <code class="docutils literal notranslate"><span class="pre">y</span></code> is a descriptor and returns a computed value when accessed (rather than returning itself as you might think from the syntax), and thus gives a different value each time. Parameters are much more complex than the above example, but this descriptor support provides the underlying mechanism for having full-featured attribute behavior like dynamic values, bounds checking, and so on.</p>
+</section>
+<section id="slots">
+<h2>Slots<a class="headerlink" href="#slots" title="Permalink to this headline">#</a></h2>
+<p>As described in the <a class="reference internal" href="Parameters.html"><span class="doc std std-doc">Parameters docs</span></a>, Parameters can store a rich collection of metadata about each parameter. Storing a full object and associated dictionary of metadata for each class and instance attribute could get expensive (i.e., slow and using a lot of memory), so Parameters are implemented using <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#slots">slots</a>. A slot is like a normal Python attribute, but instead of being stored in the convenient and flexible but slow <code class="docutils literal notranslate"><span class="pre">__dict__</span></code> attribute of the object, slots are stored in a fixed-size data structure <code class="docutils literal notranslate"><span class="pre">__slots__</span></code> that works like a C <code class="docutils literal notranslate"><span class="pre">struct</span></code>.  <code class="docutils literal notranslate"><span class="pre">__slots__</span></code> reserves just enough space to store these attributes, which can be accessed instantaneously rather than requiring a dictionary lookup (hash table search).</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">__slots__</span></code> requires special support for operations to copy and restore Parameters (e.g. for Python persistent storage pickling); see <code class="docutils literal notranslate"><span class="pre">__getstate__</span></code> and <code class="docutils literal notranslate"><span class="pre">__setstate__</span></code>. A Parameter defines at least these slots, with additional slots added for each subclass:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'_internal_name'</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span> <span class="s1">'doc'</span><span class="p">,</span> <span class="s1">'precedence'</span><span class="p">,</span> 
+             <span class="s1">'instantiate'</span><span class="p">,</span> <span class="s1">'constant'</span><span class="p">,</span> <span class="s1">'readonly'</span><span class="p">,</span> <span class="s1">'pickle_default_value'</span><span class="p">,</span>
+             <span class="s1">'allow_None'</span><span class="p">,</span> <span class="s1">'per_instance'</span><span class="p">,</span> <span class="s1">'watchers'</span><span class="p">,</span> <span class="s1">'owner'</span><span class="p">,</span> <span class="s1">'_label'</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>In most cases, you can just treat a Parameter’s existing slots like attributes of the Parameter class; they work just the same as regular attributes except for speed and storage space. However, if you add a <em>new</em> attribute to a Parameter class, you have to make sure that you also add it to the <code class="docutils literal notranslate"><span class="pre">__slots__</span></code> defined for that Parameter class, or you’ll either get an error or else the Parameter will get an unnecessary full <code class="docutils literal notranslate"><span class="pre">__dict__</span></code> object just to hold the one new attribute.</p>
+</section>
+<section id="metaclasses">
+<h2>Metaclasses<a class="headerlink" href="#metaclasses" title="Permalink to this headline">#</a></h2>
+<p>Another way <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> and <code class="docutils literal notranslate"><span class="pre">Parameterized</span></code> differ from ordinary Python classes is that they specify a special <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#metaclasses">metaclass</a> that determines how they behave. Just like you instantiate a Python class to get a Python object, you instantiate a Python metaclass to get a Python class. Most classes are instances of the default metaclass named <code class="docutils literal notranslate"><span class="pre">type</span></code>, but with a custom metaclass, you can define how every Python class with that metaclass will behave, at a fundamental level.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ParameterMetaclass</span></code> is fairly simple, mainly overriding docstrings so that <code class="docutils literal notranslate"><span class="pre">help(someparam)</span></code> gives the declared documentation for the Parameter instance, rather than the less-useful docstring for the underlying class that it would otherwise display. This behavior is convenient, but not essential to the operation of Param.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ParameterizedMetaclass</span></code>, on the other hand, defines a lot of the behavior behind Param’s features.  In particular, the metaclass implements the behavior for getting and setting parameter values at the class level, similar to how a descriptor controls such behavior at the instance level. Without the metaclass, setting the value of a class attribute to a scalar like <code class="docutils literal notranslate"><span class="pre">5</span></code> would wipe out the <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> object rather than updating the default value. The metaclass thus performs the same role at the class level as descriptors do at the instance level. Descriptors allow setting the value of an instance attribute without overriding the <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> object on that instance, and the metaclass allows setting the value of a class attribute without overridding the <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> object on the class. All told, the ParameterizedMetaclass handles:</p>
+<ul class="simple">
+<li><p>allowing Parameter default values to be set at the class level (as just described),</p></li>
+<li><p>supporting inheriting Parameter objects from superclasses,</p></li>
+<li><p>instantiating parameter default values into the class’s dictionary (if needed)</p></li>
+<li><p>populating the <code class="docutils literal notranslate"><span class="pre">name</span></code> slot of each Parameter by its attribute name in the class,</p></li>
+<li><p>reporting whether a class has been declared to be abstract (useful for ignoring it in selectors),</p></li>
+<li><p>various bookkeeping about dependencies and watchers,</p></li>
+<li><p>generating docstrings at the class level for each Parameter in the class so that <code class="docutils literal notranslate"><span class="pre">help(parameterizedclass)</span></code> displays not just the class docstring but also information about the Parameters in it (or in superclasses)</p></li>
+</ul>
+<p>Thus much of how Param works depends on ParameterizedMetaclass.</p>
+</section>
+<section id="custom-attribute-access">
+<h2>Custom attribute access<a class="headerlink" href="#custom-attribute-access" title="Permalink to this headline">#</a></h2>
+<p>The above mechanisms let Param <a class="reference external" href="https://docs.python.org/3/reference/datamodel.html#customizing-attribute-access">customize attribute access</a> for dynamic behavior and control over user settings. As an example of how this all fits together, consider the following code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">param</span> <span class="kn">import</span> <span class="n">Parameterized</span><span class="p">,</span> <span class="n">Parameter</span>
+
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="n">Parameterized</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">per_instance</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">instantiate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">a1</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here, a1 and a2 share one Parameter object (<code class="docutils literal notranslate"><span class="pre">A.__dict__['p']</span></code>), because <code class="docutils literal notranslate"><span class="pre">per_instance</span></code> is <code class="docutils literal notranslate"><span class="pre">False</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">'p'</span><span class="p">]</span> <span class="ow">is</span> <span class="n">a1</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">p</span> <span class="ow">is</span> <span class="n">a2</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>The default (class-attribute) value of p is stored in this Parameter object (<code class="docutils literal notranslate"><span class="pre">A.__dict__['p'].default</span></code>), but is accessible as <code class="docutils literal notranslate"><span class="pre">A.p</span></code> due to the Parameter being a descriptor:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">'p'</span><span class="p">]</span><span class="o">.</span><span class="n">default</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<p>If the value of <code class="docutils literal notranslate"><span class="pre">p</span></code> is set on <code class="docutils literal notranslate"><span class="pre">a1</span></code>, <code class="docutils literal notranslate"><span class="pre">a1</span></code>’s value of <code class="docutils literal notranslate"><span class="pre">p</span></code> is stored in the <code class="docutils literal notranslate"><span class="pre">a1</span></code> instance itself, under a specially mangled attribute name. The mangled name is called the <code class="docutils literal notranslate"><span class="pre">_internal_name</span></code> of the parameter, and is constructed from the “attrib name” of the parameter (i.e. <code class="docutils literal notranslate"><span class="pre">p</span></code> in this case) but modified so that it will not be confused with the underlying <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> object <code class="docutils literal notranslate"><span class="pre">p</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a1</span><span class="o">.</span><span class="n">p</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">a1</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="s1">'_p_param_value'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">a1.p</span></code> is requested, <code class="docutils literal notranslate"><span class="pre">a1.__dict__['_p_param_value']</span></code> is returned. When <code class="docutils literal notranslate"><span class="pre">a2.p</span></code> is requested, <code class="docutils literal notranslate"><span class="pre">_p_param_value</span></code> is not found in <code class="docutils literal notranslate"><span class="pre">a2.__dict__</span></code>, so <code class="docutils literal notranslate"><span class="pre">A.__dict__['p'].default</span></code> (i.e. <code class="docutils literal notranslate"><span class="pre">A.p</span></code>) is returned instead:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a2</span><span class="o">.</span><span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because the value for <code class="docutils literal notranslate"><span class="pre">a2.p</span></code> is returned from <code class="docutils literal notranslate"><span class="pre">A.p</span></code>, changing <code class="docutils literal notranslate"><span class="pre">A.p</span></code> will affect <code class="docutils literal notranslate"><span class="pre">a2.p</span></code>, but not <code class="docutils literal notranslate"><span class="pre">a1.p</span></code> since it has its own independent value:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">p</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">a2</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">a1</span><span class="o">.</span><span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">p</span></code> was not defined in <code class="docutils literal notranslate"><span class="pre">A</span></code> but was defined in a superclass, the value found in that superclass would be returned instead.</p>
+<p>You can re-execute the above code changing to <code class="docutils literal notranslate"><span class="pre">per_instance=True</span></code> and/or <code class="docutils literal notranslate"><span class="pre">instantiate=True</span></code> on Parameter <code class="docutils literal notranslate"><span class="pre">p</span></code> and see how the behavior differs. With <code class="docutils literal notranslate"><span class="pre">per_instance=True</span></code> (which would normally be the default), <code class="docutils literal notranslate"><span class="pre">a1</span></code> and <code class="docutils literal notranslate"><span class="pre">a2</span></code> would each have independent copies of the <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> object, and with <code class="docutils literal notranslate"><span class="pre">instantiate=True</span></code>, each instance would get its own copy of the class’s default value, making it immune to later changes at the class level.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="other-notes">
+<h1>Other notes<a class="headerlink" href="#other-notes" title="Permalink to this headline">#</a></h1>
+<p>Once we have Parameter descriptors and the metaclasses, there is relatively little left for the Parameterized class itself to do:</p>
+<ul class="simple">
+<li><p>implementing the rest of <a class="reference internal" href="Dependencies_and_Watchers.html"><span class="doc std std-doc">dependencies and watchers</span></a></p></li>
+<li><p>providing a constructor that lets you set instance parameters</p></li>
+<li><p>instantiating and providing the <code class="docutils literal notranslate"><span class="pre">.param</span></code> accessor for invoking methods and accessing the Parameter objects</p></li>
+<li><p>handling state saving and restoring (pickling)</p></li>
+</ul>
+<p>And that’s it for the core of Param! There are other behaviors implemented at the level of specific Parameters, but those are typically localized and can be understood by reading the class docstring for that Parameter type.</p>
+</section>
+</div>
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+<a class="left-prev" href="Dynamic_Parameters.html" id="prev-link" title="previous page">
+<i class="fas fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Dynamic parameter values</p>
+</div>
+</a>
+<a class="right-next" href="../comparisons.html" id="next-link" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">Comparison to other approaches</p>
+</div>
+<i class="fas fa-angle-right"></i>
+</a>
+</div>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<div class="footer-item">
+<p class="copyright">
+    © Copyright 2003-2022 HoloViz developers.<br/>
+</p>
+</div>
+<div class="footer-item">
+<p class="last-updated">
+Last updated on 2022-03-31.<br/>
+</p>
+</div>
+</div>
+</footer>
+</body>
+</html>

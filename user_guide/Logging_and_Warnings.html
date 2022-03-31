@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>Logging and Warnings — param v1.12.1</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="../_static/graphviz.css" rel="stylesheet" type="text/css">
+<link href="../_static/copybutton.css" rel="stylesheet" type="text/css">
+<link href="../_static/site.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+<script src="../_static/jquery.js"></script>
+<script src="../_static/underscore.js"></script>
+<script src="../_static/doctools.js"></script>
+<script src="../_static/togglebutton.js"></script>
+<script src="../_static/clipboard.min.js"></script>
+<script src="../_static/copybutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<link href="../_static/favicon.ico" rel="shortcut icon">
+<link href="../about.html" rel="author" title="About these documents"/>
+<link href="../genindex.html" rel="index" title="Index"/>
+<link href="../search.html" rel="search" title="Search"/>
+<link href="ParameterizedFunctions.html" rel="next" title="ParameterizedFunctions"/>
+<link href="Outputs.html" rel="prev" title="Outputs"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="None" name="docsearch:language"/>
+<!-- Google Analytics -->
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-154795830-6', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+<div id="navbar-start">
+<a class="navbar-brand" href="../index.html">
+<img alt="logo" class="logo" src="../_static/logo_horizontal.png"/>
+</a>
+</div>
+<button aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar-collapsible" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="col-lg-9 collapse navbar-collapse" id="navbar-collapsible">
+<div class="mr-auto" id="navbar-center">
+<div class="navbar-center-item">
+<ul class="navbar-nav" id="navbar-main-elements">
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../index.html">
+  Introduction
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../getting_started.html">
+  Getting Started
+ </a>
+</li>
+<li class="toctree-l1 current active nav-item">
+<a class="reference internal nav-link" href="index.html">
+  User Guide
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../comparisons.html">
+  Comparisons
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../roadmap.html">
+  Roadmap
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../reference.html">
+  API
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference external nav-link" href="https://github.com/holoviz/param">
+  Github Source
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="../about.html">
+  About
+ </a>
+</li>
+</ul>
+</div>
+</div>
+<div id="navbar-end">
+<div class="navbar-end-item">
+<ul aria-label="Icon Links" class="navbar-nav" id="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/holoviz/param" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+<label class="sr-only">GitHub</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://twitter.com/holoviz_org" rel="noopener" target="_blank" title="Twitter"><span><i class="fab fa-twitter-square"></i></span>
+<label class="sr-only">Twitter</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://discourse.holoviz.org/" rel="noopener" target="_blank" title="Discourse"><span><i class="fab fa-discourse"></i></span>
+<label class="sr-only">Discourse</label></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="container-xl">
+<div class="row">
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="col-12 col-md-3 bd-sidebar">
+<div class="sidebar-start-items"><form action="../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="icon fas fa-search"></i>
+<input aria-label="Search the docs ..." autocomplete="off" class="form-control" id="search-input" name="q" placeholder="Search the docs ..." type="search"/>
+</form><nav aria-label="Main navigation" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item active">
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1">
+<a class="reference internal" href="index.html">
+   Overview
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Simplifying_Codebases.html">
+   Simplifying Codebases
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Parameters.html">
+   Parameters and Parameterized objects
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Parameter_Types.html">
+   Parameter Types
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Dependencies_and_Watchers.html">
+   Dependencies and Watchers
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Serialization_and_Persistence.html">
+   Serialization and Persistence
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Outputs.html">
+   Outputs
+  </a>
+</li>
+<li class="toctree-l1 current active">
+<a class="current reference internal" href="#">
+   Logging and Warnings
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="ParameterizedFunctions.html">
+   ParameterizedFunctions
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="Dynamic_Parameters.html">
+   Dynamic Parameters
+  </a>
+</li>
+<li class="toctree-l1">
+<a class="reference internal" href="How_Param_Works.html">
+   How Param Works
+  </a>
+</li>
+</ul>
+</div>
+</nav>
+</div>
+<div class="sidebar-end-items">
+</div>
+</div>
+<div class="d-none d-xl-block col-xl-2 bd-toc">
+<div class="toc-item">
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+<i class="fas fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#">
+   Logging and Warnings
+  </a>
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#writing-log-messages">
+     Writing log messages
+    </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#controlling-the-logging-level">
+     Controlling the logging level
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#controlling-the-formatting-of-log-messages">
+   Controlling the formatting of log messages
+  </a>
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#counting-warnings">
+     Counting warnings
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+<div class="toc-item">
+</div>
+</div>
+<main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+<div>
+<section class="tex2jax_ignore mathjax_ignore" id="logging-and-warnings">
+<h1>Logging and Warnings<a class="headerlink" href="#logging-and-warnings" title="Permalink to this headline">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">Parameterized</span></code> objects provide methods for displaying logging messages and warnings in a way that can be controlled and redirected globally using the standard Python <a class="reference external" href="https://docs.python.org/3/library/logging.html">logging</a> module (see the <a class="reference external" href="https://docs.python.org/3/howto/logging.html">logging cookbook</a>). Compared to using a Python logger directly, using these methods inside your Parameterized class helps users by making the messages consistent, each prepending with information about the Parameterized object where the call was made so that your users can understand what the message indicates.</p>
+<p>By default, a Python logger named <code class="docutils literal notranslate"><span class="pre">param</span></code> will be instantiated to do the logging, but another logger can be supplied by setting <code class="docutils literal notranslate"><span class="pre">param.parameterized.logger</span></code> to it after importing <code class="docutils literal notranslate"><span class="pre">param.parameterized</span></code>.</p>
+<section id="writing-log-messages">
+<h2>Writing log messages<a class="headerlink" href="#writing-log-messages" title="Permalink to this headline">#</a></h2>
+<p>Each logging message has an associated logging <code class="docutils literal notranslate"><span class="pre">level</span></code> that indicates how severe a condition is being described (DEBUG, VERBOSE, INFO (aka “message”), WARNING, ERROR, or CRITICAL). These levels are as defined by the logging module, except for the addition of VERBOSE as a level intermediate between DEBUG (internal debugging information) and INFO (user-relevant non-error messages).</p>
+<p>The typical way to print a message is to call <code class="docutils literal notranslate"><span class="pre">.param.log()</span></code> with one of the following logging levels:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.param.log(param.DEBUG,</span> <span class="pre">...)</span></code>: Detailed debugging information, not displayed onscreen by default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.param.log(param.VERBOSE,</span> <span class="pre">...)</span></code>: Additional sometimes-useful information, not displayed onscreen by default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.param.log(param.INFO,</span> <span class="pre">...)</span></code>: Informative message, displayed onscreen by default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.param.log(param.WARNING,</span> <span class="pre">...)</span></code>: Warning of an unexpected or inappropriate but non-fatal condition, displayed onscreen by default.</p></li>
+</ul>
+<p>For convenience and to allow eventual integration with the Python <a class="reference external" href="https://docs.python.org/3/library/warnings.html">warnings</a> module, <code class="docutils literal notranslate"><span class="pre">.param.warning(</span></code> is available as an alias for <code class="docutils literal notranslate"><span class="pre">.param.log(param.WARNING,</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.param.warning(...)</span></code>: Warning of an unexpected or inappropriate but non-fatal condition, displayed onscreen by default.</p></li>
+</ul>
+<p>The arguments accepted in each case are the same as those of <a class="reference external" href="https://docs.python.org/3/library/logging.html#logging.debug">logging.debug()</a>. Specifically, each call is like <code class="docutils literal notranslate"><span class="pre">.param.debug(msg,</span> <span class="pre">*args,</span> <span class="pre">**kw)</span></code>, where <code class="docutils literal notranslate"><span class="pre">msg</span></code> is an <a class="reference external" href="https://wiki.python.org/moin/StringFormatting">old-style (‘%’) format string</a> and the <code class="docutils literal notranslate"><span class="pre">args</span></code> and <code class="docutils literal notranslate"><span class="pre">kwargs</span></code> will be merged with that format string. E.g.:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">param</span>
+
+<span class="n">desired</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">actual</span> <span class="o">=</span> <span class="mi">5</span>
+
+<span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s2">"Welcome!"</span><span class="p">)</span>
+<span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="s2">"Local variables: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="nb">locals</span><span class="p">())</span>
+<span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span> <span class="s2">"Value </span><span class="si">%02d</span><span class="s2"> is not </span><span class="si">%d</span><span class="s2">"</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">desired</span><span class="p">)</span>
+<span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Value </span><span class="si">%02d</span><span class="s2"> is not </span><span class="si">%d</span><span class="s2">"</span><span class="p">,</span> <span class="n">actual</span><span class="p">,</span> <span class="n">desired</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:param.main: Welcome!
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:param.main: Value 05 is not 1
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:param.main: Value 05 is not 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we’ve used the default global Parameterized object <code class="docutils literal notranslate"><span class="pre">param.main</span></code>, useful for generic module-level messages, but more often you would make a call like <code class="docutils literal notranslate"><span class="pre">self.param.log()</span></code> <em>inside</em> a Parameterized class instead. You can see that the messages are each prefixed by the logging level, <code class="docutils literal notranslate"><span class="pre">param</span></code> (the name of the default logger), and the name of this object (<code class="docutils literal notranslate"><span class="pre">main</span></code> in this case). You can also see that, by default, verbose messages are not actually printed.</p>
+<p>You may wonder (a) why the formatting string is “old style” , and (b) why the formatting values “actual, desired” are not combined directly with the formatting string. I.e., why not just use a Python3 f-string, like:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">WARNING</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"Value </span><span class="si">{</span><span class="n">actual</span><span class="si">:</span><span class="s2">02</span><span class="si">}</span><span class="s2"> is not </span><span class="si">{</span><span class="n">desired</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="c1"># Discouraged!</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:param.main: Value 05 is not 1
+</pre></div>
+</div>
+</div>
+</div>
+<p>The answer is that particularly for <code class="docutils literal notranslate"><span class="pre">debug</span></code> and <code class="docutils literal notranslate"><span class="pre">verbose</span></code> messages that could occur inside frequently executed code, we want logging to be “lazy”, in that we do not want to render a string representation for <code class="docutils literal notranslate"><span class="pre">actual</span></code>, <code class="docutils literal notranslate"><span class="pre">desired</span></code>, etc. unless we are actually printing the message. If we use an f-string or any other locally formatted string, the string formatting will be done <em>whether</em> <em>or</em> <em>not</em> the message will be displayed, potentially causing drastic slowdowns in your code. For instance, in the code above, the entire <code class="docutils literal notranslate"><span class="pre">locals()</span></code> dictionary would be iterated over, printed to strings. Of course, since the message isn’t being printed in that case, the entire format string would then be discarded, greatly slowing down the code without producing any output. To avoid that, the logging module has to defer the string substitution and handle that itself, and it was written before Python3, so it only supports old-style substitution. So, even though it is more awkward, it is highly recommended to use this old-style, lazy string formatting support.</p>
+</section>
+<section id="controlling-the-logging-level">
+<h2>Controlling the logging level<a class="headerlink" href="#controlling-the-logging-level" title="Permalink to this headline">#</a></h2>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">param.parameterized.logging_level</span></code> context manager to temporarily reduce or elevate the logging level while you execute code:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">param</span><span class="o">.</span><span class="n">logging_level</span><span class="p">(</span><span class="s1">'CRITICAL'</span><span class="p">):</span>
+    <span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s2">"Message 1"</span><span class="p">)</span>
+    <span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="s2">"Verbose 1"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">param</span><span class="o">.</span><span class="n">logging_level</span><span class="p">(</span><span class="s1">'DEBUG'</span><span class="p">):</span>
+    <span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s2">"Message 2"</span><span class="p">)</span>
+    <span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="s2">"Verbose 2"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:param.main: Message 2
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VERBOSE:param.main: Verbose 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can also set the value more globally (and permanently) on the logger object:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span> <span class="s2">"Message 2"</span><span class="p">)</span>
+<span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">,</span> <span class="s2">"Verbose 2"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:param.main: Message 2
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VERBOSE:param.main: Verbose 2
+</pre></div>
+</div>
+</div>
+</div>
+<p>For testing, continuous integration (CI), or other specific applications, you can also set <code class="docutils literal notranslate"><span class="pre">param.parameterized.warnings_as_exceptions</span> <span class="pre">=</span> <span class="pre">True</span></code>, which will cause your program to raise an exception the first time it encounters any warning.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="controlling-the-formatting-of-log-messages">
+<h1>Controlling the formatting of log messages<a class="headerlink" href="#controlling-the-formatting-of-log-messages" title="Permalink to this headline">#</a></h1>
+<p>The Python logging module provides many options for configuring how the log messages are generated. For complete control, you can instantiate your own logger and set <code class="docutils literal notranslate"><span class="pre">param.parameterized.logger</span></code> to it after importing <code class="docutils literal notranslate"><span class="pre">param.parameterized</span></code>.</p>
+<p>A hook is provided for the relatively common case when you want to prefix each message with the time of day, a progress indication, a simulator time, or some other indication of a global state. Specifically, you can set <code class="docutils literal notranslate"><span class="pre">param.parameterized.dbprint_prefix</span></code> to a callable object returning a string. The object will be called when constructing each message:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="c1">#param.parameterized.warnings_as_exceptions = True</span>
+
+<span class="n">param</span><span class="o">.</span><span class="n">parameterized</span><span class="o">.</span><span class="n">dbprint_prefix</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
+
+<span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Message 4"</span><span class="p">)</span>
+<span class="n">param</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Message 5"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:param.main: 2022-03-31 15:44:51.703346: Message 4
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING:param.main: 2022-03-31 15:44:51.704887: Message 5
+</pre></div>
+</div>
+</div>
+</div>
+<section id="counting-warnings">
+<h2>Counting warnings<a class="headerlink" href="#counting-warnings" title="Permalink to this headline">#</a></h2>
+<p>Typically, a program will abort if an error is encountered, making such a condition hard to miss, but warning messages might be lost in a sea of informational, verbose, or debug messages. Param keeps track of how many times <code class="docutils literal notranslate"><span class="pre">.param.warning(...)</span></code> (or its alias <code class="docutils literal notranslate"><span class="pre">.param.log(param.WARNING,</span> <span class="pre">...)</span></code>) has been called, and it is often useful to print out that value at the end of a program run:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Run completed. </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">parameterized</span><span class="o">.</span><span class="n">warning_count</span><span class="si">}</span><span class="s2"> warnings were encountered."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Run completed. 5 warnings were encountered.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</div>
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+<a class="left-prev" href="Outputs.html" id="prev-link" title="previous page">
+<i class="fas fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Outputs</p>
+</div>
+</a>
+<a class="right-next" href="ParameterizedFunctions.html" id="next-link" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">ParameterizedFunctions</p>
+</div>
+<i class="fas fa-angle-right"></i>
+</a>
+</div>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<div class="footer-item">
+<p class="copyright">
+    © Copyright 2003-2022 HoloViz developers.<br/>
+</p>
+</div>
+<div class="footer-item">
+<p class="last-updated">
+Last updated on 2022-03-31.<br/>
+</p>
+</div>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<map id="inheritance3764b26524" name="inheritance3764b26524">
+<area shape="rect" id="node1" href="#param.serializer.JSONSerialization" target="_top" title="Class responsible for specifying JSON serialization, deserialization" alt="" coords="369,104,613,129"/>
+<area shape="rect" id="node2" href="#param.serializer.Serialization" target="_top" title="Base class used to implement different types of serialization." alt="" coords="57,104,269,129"/>
+<area shape="rect" id="node3" href="#param.serializer.UnsafeserializableException" target="_top" title="param.serializer.UnsafeserializableException" alt="" coords="5,55,321,80"/>
+<area shape="rect" id="node4" href="#param.serializer.UnserializableException" target="_top" title="param.serializer.UnserializableException" alt="" coords="19,5,307,31"/>
+</map>

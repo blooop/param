@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>Getting Started — param v1.12.1</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="_static/graphviz.css" rel="stylesheet" type="text/css">
+<link href="_static/copybutton.css" rel="stylesheet" type="text/css">
+<link href="_static/site.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/togglebutton.js"></script>
+<script src="_static/clipboard.min.js"></script>
+<script src="_static/copybutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<link href="_static/favicon.ico" rel="shortcut icon">
+<link href="about.html" rel="author" title="About these documents"/>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="user_guide/index.html" rel="next" title="User Guide"/>
+<link href="index.html" rel="prev" title="Welcome to Param!"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="None" name="docsearch:language"/>
+<!-- Google Analytics -->
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-154795830-6', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+<div id="navbar-start">
+<a class="navbar-brand" href="index.html">
+<img alt="logo" class="logo" src="_static/logo_horizontal.png"/>
+</a>
+</div>
+<button aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar-collapsible" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="col-lg-9 collapse navbar-collapse" id="navbar-collapsible">
+<div class="mr-auto" id="navbar-center">
+<div class="navbar-center-item">
+<ul class="navbar-nav" id="navbar-main-elements">
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="index.html">
+  Introduction
+ </a>
+</li>
+<li class="toctree-l1 current active nav-item">
+<a class="current reference internal nav-link" href="#">
+  Getting Started
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="user_guide/index.html">
+  User Guide
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="comparisons.html">
+  Comparisons
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="roadmap.html">
+  Roadmap
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="reference.html">
+  API
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference external nav-link" href="https://github.com/holoviz/param">
+  Github Source
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="about.html">
+  About
+ </a>
+</li>
+</ul>
+</div>
+</div>
+<div id="navbar-end">
+<div class="navbar-end-item">
+<ul aria-label="Icon Links" class="navbar-nav" id="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/holoviz/param" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+<label class="sr-only">GitHub</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://twitter.com/holoviz_org" rel="noopener" target="_blank" title="Twitter"><span><i class="fab fa-twitter-square"></i></span>
+<label class="sr-only">Twitter</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://discourse.holoviz.org/" rel="noopener" target="_blank" title="Discourse"><span><i class="fab fa-discourse"></i></span>
+<label class="sr-only">Discourse</label></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="container-xl">
+<div class="row">
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="col-12 col-md-3 bd-sidebar">
+<div class="sidebar-start-items"><form action="search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="icon fas fa-search"></i>
+<input aria-label="Search the docs ..." autocomplete="off" class="form-control" id="search-input" name="q" placeholder="Search the docs ..." type="search"/>
+</form><nav aria-label="Main navigation" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item active">
+</div>
+</nav>
+</div>
+<div class="sidebar-end-items">
+</div>
+</div>
+<div class="d-none d-xl-block col-xl-2 bd-toc">
+<div class="toc-item">
+<div class="tocsection onthispage mt-5 pt-1 pb-3">
+<i class="fas fa-list"></i> On this page
+</div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#installation">
+   Installation
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#using-param-to-get-simple-robust-code">
+   Using Param to get simple, robust code
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#using-param-for-configuration">
+   Using Param for configuration
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#using-param-to-explore-parameter-spaces">
+   Using Param to explore parameter spaces
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#using-param-to-build-guis">
+   Using Param to build GUIs
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#learning-more">
+   Learning more
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+<div class="toc-item">
+</div>
+</div>
+<main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+<div>
+<section class="tex2jax_ignore mathjax_ignore" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">#</a></h1>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">#</a></h2>
+<p>Param has no required dependencies outside of Python’s standard library, and so it is very easy to install.</p>
+<p>Official releases of Param are available from <a class="reference external" href="https://anaconda.org/ioam/param">conda</a> and <a class="reference external" href="http://pypi.python.org/pypi/param">PyPI</a>, and can be installed via:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">pyviz</span> <span class="n">param</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">user</span> <span class="n">param</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">param</span>
+</pre></div>
+</div>
+</section>
+<section id="using-param-to-get-simple-robust-code">
+<h2>Using Param to get simple, robust code<a class="headerlink" href="#using-param-to-get-simple-robust-code" title="Permalink to this headline">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">param</span></code> library gives you Parameters, which are used in Parameterized classes.</p>
+<p>A Parameter is a special type of Python class attribute extended to have various optional features such as type and range checking, dynamically generated values, documentation strings, default values, etc., each of which is inherited from parent classes if not specified in a subclass or instance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">param</span>
+        
+<span class="k">class</span> <span class="nc">A</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">Parameterized</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">"sum"</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">"Title for the result"</span><span class="p">)</span>
+    
+<span class="k">class</span> <span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">doc</span><span class="o">=</span><span class="s2">"First addend"</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">doc</span><span class="o">=</span><span class="s2">"Second addend"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">+</span> <span class="s2">": "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">o1</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="n">b</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">"Sum"</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">o1</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="o">&gt;&gt;</span> <span class="n">o1</span><span class="p">()</span>
+<span class="s1">'Sum: 9'</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">o1</span><span class="o">.</span><span class="n">b</span>
+<span class="mi">4</span>
+</pre></div>
+</div>
+<p>As you can see, the Parameters defined here work precisely like any other Python attributes in your code, so it’s generally quite straightforward to migrate an existing class to use Param. Just inherit from <code class="docutils literal notranslate"><span class="pre">param.Parameterized</span></code>, then provide an optional <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> declaration for each parameter the object accepts, including ranges and allowed values if appropriate. You only need to declare and document each parameter <em>once</em>, at the highest superclass where it applies, and its default value all the other metadata will be inherited by each subclass.</p>
+<p>Once you’ve declared your parameters, a whole wealth of features and better behavior is now unlocked! For instance, what happens if a user tries to supply some inappropriate data? With Param, such errors will be caught immediately:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ParamClass</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="s2">"four"</span><span class="p">)</span>
+<span class="go">ValueError: Parameter 'a' must be an integer.</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">o2</span> <span class="o">=</span> <span class="n">ParamClass</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">o2</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>
+<span class="go">ValueError: Parameter 'b' must be at least 0</span>
+</pre></div>
+</div>
+<p>Of course, you could always add more code to an ordinary Python class to check for errors like that, but as described in the <a class="reference internal" href="user_guide/Simplifying_Codebases.html"><span class="doc std std-doc">User Guide</span></a>, that quickly gets unwieldy, with dozens of lines of exceptions, assertions, property definitions, and decorators that obscure what you actually wrote your code to do. Param lets you focus on the code you’re writing, while letting your users know exactly what inputs they can supply.</p>
+<p>The types in Param may remind you of the static types found in some languages, but here the validation is done at runtime and is checking not just types but also numeric ranges or for specific allowed values. Param thus helps you not just with programming correctness, as for static types, but also for validating user inputs. Validating user inputs is generally a large fraction of a program’s code, because such inputs are a huge source of vulnerabilities and potential error conditions, and Param lets you avoid ever having to write nearly any of that code.</p>
+<p>The <a class="reference internal" href="user_guide/index.html"><span class="doc std std-doc">User Guide</span></a> explains all the other Param features for simplifying your codebase, improving input validation, allowing flexible configuration, and supporting serialization.</p>
+</section>
+<section id="using-param-for-configuration">
+<h2>Using Param for configuration<a class="headerlink" href="#using-param-for-configuration" title="Permalink to this headline">#</a></h2>
+<p>Once you have declared your Parameters, they are now fully accessible from Python in a way that helps users of your code configure it and control it if they wish. Without any extra work by the author of the class, a user can use Python to reconfigure any of the defaults that will be used when they use these objects:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">A</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">"The sum is"</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">o3</span> <span class="o">=</span> <span class="n">B</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">o3</span><span class="p">()</span>
+<span class="go">'The sum is: 9'</span>
+</pre></div>
+</div>
+<p>Because this configuration is all declarative, the underlying values can come from a YAML file, a JSON blob, URL parameters, CLI arguments, or just about any source, letting you provide users full control over configuration with very little effort. Once you write a Parameterized class, it’s up to a user to choose how they want to work with it; your job is done!</p>
+</section>
+<section id="using-param-to-explore-parameter-spaces">
+<h2>Using Param to explore parameter spaces<a class="headerlink" href="#using-param-to-explore-parameter-spaces" title="Permalink to this headline">#</a></h2>
+<p>Param is valuable for <em>any</em> Python codebase, but it offers features that are particularly well suited for running models, simulations, machine learning pipelines, or other programs where the same code needs to be evaluated multiple times to see how it behaves with different parameter values. To facilitate such usage, numeric parameters in Param can be set to a callable value, which will be evaluated every time the parameter is accessed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">o2</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">o2</span><span class="p">(),</span> <span class="n">o2</span><span class="p">(),</span> <span class="n">o2</span><span class="p">(),</span> <span class="n">o2</span><span class="p">()</span>
+<span class="go">('The sum is: 6', 'The sum is: 7', 'The sum is: 3', 'The sum is: 3')</span>
+</pre></div>
+</div>
+<p>The code for <code class="docutils literal notranslate"><span class="pre">B</span></code> doesn’t have to have any special knowledge or processing of dynamic values, because accessing <code class="docutils literal notranslate"><span class="pre">a</span></code> always simply returns an integer, not the callable function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">o2</span><span class="o">.</span><span class="n">a</span>
+<span class="go">4</span>
+</pre></div>
+</div>
+<p>Thus the author of a Parameterized class does not have to take such dynamic values into account; their code simply works with whatever value is returned by the attribute lookup, whether it’s dynamic or not. This approach makes Parameterized code immediately ready for exploration across parameter values, whether or not the code’s author specifically provided for such usage.</p>
+<p>Param includes a separate and optional module <code class="docutils literal notranslate"><span class="pre">numbergen</span></code> that makes it simple to generate streams of numeric values for use as Parameter values. <code class="docutils literal notranslate"><span class="pre">numbergen</span></code> objects are picklable (unlike a <code class="docutils literal notranslate"><span class="pre">lambda</span></code> as above) and can be combined into expressions to build up parameter sweeps or Monte Carlo simulations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numbergen</span> <span class="k">as</span> <span class="nn">ng</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">o3</span> <span class="o">=</span> <span class="n">B</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="n">ng</span><span class="o">.</span><span class="n">Choice</span><span class="p">(</span><span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]),</span>
+<span class="gp">&gt;&gt;&gt; </span>      <span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">ng</span><span class="o">.</span><span class="n">UniformRandomInt</span><span class="p">(</span><span class="n">ubound</span><span class="o">=</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">o3</span><span class="p">(),</span> <span class="n">o3</span><span class="p">(),</span> <span class="n">o3</span><span class="p">(),</span> <span class="n">o3</span><span class="p">()</span>
+<span class="go">('The sum is: 11', 'The sum is: 3', 'The sum is: 13', 'The sum is: 7')</span>
+</pre></div>
+</div>
+<p>Numbergen objects support the usual arithmetic operations like +, -, *, /, //, %, **, and <code class="docutils literal notranslate"><span class="pre">abs()</span></code>, and so they can be freely combined with each other or with mathematical constants. They also optionally respect a global “time” (e.g. a simulation time or a logical counter), which lets you synchronize changes to dynamic values without any special coordination code.</p>
+</section>
+<section id="using-param-to-build-guis">
+<h2>Using Param to build GUIs<a class="headerlink" href="#using-param-to-build-guis" title="Permalink to this headline">#</a></h2>
+<p>Param is useful for any sort of programming, but if you need a GUI with widgets, it turns out that the information captured by a Parameter is very often already what is needed to build such a GUI. For instance, we can use the separate <a class="reference external" href="https://panel.holoviz.org">Panel</a> library to create widgets in a web browser and display the output from the above class automatically.</p>
+<p>Panel and other GUI libraries can of course explicitly instantiate widgets, so why use Param in this way? Simply put, this approach lets you cleanly separate your domain-specific code, clearly declaring the parameters it requires and respects, from your GUI code. The GUI code controls GUI issues like layout and font size, but the fundamental declaration of what parameters are available is done at the level of the code that actually uses it (classes A and B in this case). With Param, you can <em>separately</em> declare all your Parameters right where they are used, achieving robustness, type checking, and clear documentation, while avoiding having your GUI code be tightly bound up with your domain-specific details. This approach helps you build maintainable, general-purpose codebases that can easily be used with or without GUI interfaces, with unattended batch operation not needing any GUI support and GUIs not needing to be updated every time someone adds a new option or parameter to the underlying code.</p>
+</section>
+<section id="learning-more">
+<h2>Learning more<a class="headerlink" href="#learning-more" title="Permalink to this headline">#</a></h2>
+<p>The <a class="reference internal" href="user_guide/index.html"><span class="doc std std-doc">User Guide</span></a> goes through the major features of Param and how to use them. If you are interested in GUI programming, also see the <a class="reference external" href="https://panel.holoviz.org/user_guide/Param.html">Param guide</a> in Panel, and the rest of the <a class="reference external" href="https://panel.holoviz.org">Panel</a> docs. Have fun making your life better with Param!</p>
+</section>
+</section>
+</div>
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+<a class="left-prev" href="index.html" id="prev-link" title="previous page">
+<i class="fas fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Welcome to Param!</p>
+</div>
+</a>
+<a class="right-next" href="user_guide/index.html" id="next-link" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">User Guide</p>
+</div>
+<i class="fas fa-angle-right"></i>
+</a>
+</div>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<div class="footer-item">
+<p class="copyright">
+    © Copyright 2003-2022 HoloViz developers.<br/>
+</p>
+</div>
+<div class="footer-item">
+<p class="last-updated">
+Last updated on 2022-03-31.<br/>
+</p>
+</div>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>Roadmap — param v1.12.1</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="_static/graphviz.css" rel="stylesheet" type="text/css">
+<link href="_static/copybutton.css" rel="stylesheet" type="text/css">
+<link href="_static/site.css" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+<script src="_static/jquery.js"></script>
+<script src="_static/underscore.js"></script>
+<script src="_static/doctools.js"></script>
+<script src="_static/togglebutton.js"></script>
+<script src="_static/clipboard.min.js"></script>
+<script src="_static/copybutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<link href="_static/favicon.ico" rel="shortcut icon">
+<link href="about.html" rel="author" title="About these documents"/>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<link href="reference.html" rel="next" title="API Reference Manual"/>
+<link href="comparisons.html" rel="prev" title="Comparison to other approaches"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="None" name="docsearch:language"/>
+<!-- Google Analytics -->
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+<script>
+                        window.ga = window.ga || function () {
+                            (ga.q = ga.q || []).push(arguments) };
+                        ga.l = +new Date;
+                        ga('create', 'UA-154795830-6', 'auto');
+                        ga('set', 'anonymizeIp', true);
+                        ga('send', 'pageview');
+                    </script>
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+<div id="navbar-start">
+<a class="navbar-brand" href="index.html">
+<img alt="logo" class="logo" src="_static/logo_horizontal.png"/>
+</a>
+</div>
+<button aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbar-collapsible" data-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="col-lg-9 collapse navbar-collapse" id="navbar-collapsible">
+<div class="mr-auto" id="navbar-center">
+<div class="navbar-center-item">
+<ul class="navbar-nav" id="navbar-main-elements">
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="index.html">
+  Introduction
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="getting_started.html">
+  Getting Started
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="user_guide/index.html">
+  User Guide
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="comparisons.html">
+  Comparisons
+ </a>
+</li>
+<li class="toctree-l1 current active nav-item">
+<a class="current reference internal nav-link" href="#">
+  Roadmap
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="reference.html">
+  API
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference external nav-link" href="https://github.com/holoviz/param">
+  Github Source
+ </a>
+</li>
+<li class="toctree-l1 nav-item">
+<a class="reference internal nav-link" href="about.html">
+  About
+ </a>
+</li>
+</ul>
+</div>
+</div>
+<div id="navbar-end">
+<div class="navbar-end-item">
+<ul aria-label="Icon Links" class="navbar-nav" id="navbar-icon-links">
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/holoviz/param" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+<label class="sr-only">GitHub</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://twitter.com/holoviz_org" rel="noopener" target="_blank" title="Twitter"><span><i class="fab fa-twitter-square"></i></span>
+<label class="sr-only">Twitter</label></a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://discourse.holoviz.org/" rel="noopener" target="_blank" title="Discourse"><span><i class="fab fa-discourse"></i></span>
+<label class="sr-only">Discourse</label></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<div class="container-xl">
+<div class="row">
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="col-12 col-md-3 bd-sidebar">
+<div class="sidebar-start-items"><form action="search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="icon fas fa-search"></i>
+<input aria-label="Search the docs ..." autocomplete="off" class="form-control" id="search-input" name="q" placeholder="Search the docs ..." type="search"/>
+</form><nav aria-label="Main navigation" class="bd-links" id="bd-docs-nav">
+<div class="bd-toc-item active">
+</div>
+</nav>
+</div>
+<div class="sidebar-end-items">
+</div>
+</div>
+<div class="d-none d-xl-block col-xl-2 bd-toc">
+<div class="toc-item">
+<nav id="bd-toc-nav">
+</nav>
+</div>
+<div class="toc-item">
+</div>
+</div>
+<main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+<div>
+<section class="tex2jax_ignore mathjax_ignore" id="roadmap">
+<h1>Roadmap<a class="headerlink" href="#roadmap" title="Permalink to this headline">#</a></h1>
+<p>Param is a mature library (originally from 2003) that changes very slowly and very rarely; it is fully ready for use in production applications. Major changes are undertaken only after significant discussions and with attention to how existing Param-based applications will be affected. Thus Param users should not expect only slow progress on these roadmap items, but they are listed here in the hopes that they will be useful.</p>
+<p>Currently scheduled plans:</p>
+<ul class="simple">
+<li><p>Remove deprecated API and tag release 2.0. Deprecated API is noted in the source code and except in very rare cases has never been documented on the website, so removing these methods should only affect users of Param from 2020 or earlier.</p></li>
+<li><p>More powerful serialization (to JSON, YAML, and URLs) to make it simpler to persist the state of a Parameterized object. Some support already merged as https://github.com/holoviz/param/pull/414 , but still to be further developed as support for using Parameterized objects to build REST APIS (see https://github.com/holoviz/lumen for example usage).</p></li>
+</ul>
+<p>Other items that are not yet scheduled but would be great to have:</p>
+<ul class="simple">
+<li><p>Integrate more fully with Python 3 language features like <a class="reference external" href="https://www.python.org/dev/peps/pep-0526">type annotations</a> and <a class="reference external" href="https://docs.python.org/3/library/dataclasses.html">data classes</a>, e.g. to respect and validate against declared types without requiring an explicit <code class="docutils literal notranslate"><span class="pre">param.Parameter</span></code> declaration and potentially without inheriting from <code class="docutils literal notranslate"><span class="pre">param.Parameterized</span></code>, and to better support IDE type-checking features.</p></li>
+<li><p>Integrate and interoperate more fully with other frameworks like Django models, Traitlets, attrs, Django models, Pydantic, or swagger/OpenAPI, each of which capture or can use similar information about parameter names, values, and constraints and so in many cases can easily be converted from one to the other.</p></li>
+<li><p>Improve support for Param in editors, automatic formatting tools, linters, document generators, and other tools that process Python code and could be made to have special-purpose optimizations specifically for Parameterized objects.</p></li>
+<li><p>Follow PEP8 more strictly: PEP8 definitely wasn’t written with Parameters in mind, and it typically results in badly formatted files when applied to Parameterized code. But PEP8 could be applied to Param’s own code, e.g. using Black.</p></li>
+<li><p>Triaging open issues: The Param developer team consists of volunteers typically using Param on their projects but not explicity tasked with or funded to work on Param itself. It would thus be great if the more experienced Param users could help address some of the issues that have been raised but not yet solved.</p></li>
+<li><p>Improve test coverage</p></li>
+</ul>
+<p>Other <a class="reference external" href="https://github.com/holoviz/param/issues">issues</a> are collected on Github and will be addressed on various time scales as indicated by the issue’s milestone (typically next minor release, next major release, or “wishlist” (not scheduled or assigned to any person but agreed to be desirable). Any contributor is encouraged to attempt to implement a “wishlist” item, though if it is particularly complex or time consuming it is useful to discuss it first with one of the core maintainers (e.g. by stating your intentions on the issue).</p>
+</section>
+</div>
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+<a class="left-prev" href="comparisons.html" id="prev-link" title="previous page">
+<i class="fas fa-angle-left"></i>
+<div class="prev-next-info">
+<p class="prev-next-subtitle">previous</p>
+<p class="prev-next-title">Comparison to other approaches</p>
+</div>
+</a>
+<a class="right-next" href="reference.html" id="next-link" title="next page">
+<div class="prev-next-info">
+<p class="prev-next-subtitle">next</p>
+<p class="prev-next-title">API Reference Manual</p>
+</div>
+<i class="fas fa-angle-right"></i>
+</a>
+</div>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<div class="footer-item">
+<p class="copyright">
+    © Copyright 2003-2022 HoloViz developers.<br/>
+</p>
+</div>
+<div class="footer-item">
+<p class="last-updated">
+Last updated on 2022-03-31.<br/>
+</p>
+</div>
+</div>
+</footer>
+</body>
+</html>
