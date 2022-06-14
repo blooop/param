@@ -966,7 +966,7 @@ class Parameter(object):
     __slots__ = ['name', '_internal_name', 'default', 'doc',
                  'precedence', 'instantiate', 'constant', 'readonly',
                  'pickle_default_value', 'allow_None', 'per_instance',
-                 'watchers', 'owner', '_label']
+                 'watchers', 'owner','units', '_label']
 
     # Note: When initially created, a Parameter does not know which
     # Parameterized class owns it, nor does it know its names
@@ -979,7 +979,8 @@ class Parameter(object):
     def __init__(self,default=None, doc=None, label=None, precedence=None,  # pylint: disable-msg=R0913
                  instantiate=False, constant=False, readonly=False,
                  pickle_default_value=True, allow_None=False,
-                 per_instance=True):
+                #  per_instance=True):
+                 per_instance=True,units=None):
 
         """Initialize a new Parameter object and store the supplied attributes:
 
@@ -1066,6 +1067,7 @@ class Parameter(object):
         self.allow_None = (default is None or allow_None)
         self.watchers = {}
         self.per_instance = per_instance
+        self.units=units
 
     @classmethod
     def serialize(cls, value):
